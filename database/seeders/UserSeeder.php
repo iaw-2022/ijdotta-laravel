@@ -22,19 +22,19 @@ class UserSeeder extends Seeder
         User::create([
             'name' => 'admin',
             'email' => 'admin@clinicapp.com',
-            'password' => Hash::make("clinic#app@2022")
+            'password' => bcrypt("clinic#app@2022")
         ]);
 
         User::create([
             'name' => 'sysowner',
             'email' => 'ij.dotta@gmail.com',
-            'password' => Hash::make("salvameSuperman!")
+            'password' => bcrypt("salvameSuperman!")
         ]);
 
         User::create([
             'name' => 'dummy',
             'email' => 'dummy@dummy.com',
-            'password' => Hash::make("12345678")
+            'password' => bcrypt("12345678")
         ]);
     }
 }
