@@ -1,5 +1,11 @@
 <?php
 
+use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\AppointmentPatternController;
+use App\Http\Controllers\DoctorController;
+use App\Http\Controllers\PatientController;
+use App\Http\Controllers\StoryController;
+use App\Http\Controllers\TreatmentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,5 +26,19 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
+
+// Does not require auth currently.
+Route::resources([
+    'doctors' => DoctorController::class,
+    'doctors.appointments' => AppointmentController::class,
+    'doctors.appointmentspatterns' => AppointmentPatternController::class,
+    'patients' => PatientController::class,
+    'patients.stories' => StoryController::class,
+    'patients.treatments' => TreatmentController::class,
+]);
+
+Route::get('/main', function() {
+    return view('layouts.main');
+});
 
 require __DIR__.'/auth.php';
