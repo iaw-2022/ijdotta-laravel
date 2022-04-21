@@ -16,11 +16,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        Doctor::factory()->count(5)->has(Appointment::factory()->count(3))->create();
+        
         $this->call([
-            UserSeeder::class
+            UserSeeder::class,
+            PatientSeeder::class
         ]);
 
-        Doctor::factory()->count(5)->has(Appointment::factory()->count(3))->create();
-        Patient::factory()->count(5)->has(Appointment::factory()->count(2))->create();
     }
 }

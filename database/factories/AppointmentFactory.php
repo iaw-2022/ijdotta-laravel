@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\Doctor;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Appointment>
@@ -20,7 +21,7 @@ class AppointmentFactory extends Factory
             'date' => $this->faker->date(),
             'initial_time' => $this->faker->time(),
             'end_time' => $this->faker->time(),
-            'doctor_id' => $this->faker->numberBetween(10000, 99999)
+            'doctor_id' => Doctor::all()->pluck('id')->random(1)->first()
         ];
     }
 }
