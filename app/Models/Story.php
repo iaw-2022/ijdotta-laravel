@@ -16,4 +16,8 @@ class Story extends Model
     public function doctor() {
         return $this->belongsTo(Doctor::class);
     }
+
+    public function treatments() {
+        return $this->hasMany(Treatment::class);
+    }
 }
