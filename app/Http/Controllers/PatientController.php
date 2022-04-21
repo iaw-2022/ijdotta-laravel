@@ -14,7 +14,8 @@ class PatientController extends Controller
      */
     public function index()
     {
-        //
+        $patients = Patient::paginate(10);
+        return view('patients.index')->with('patients', $patients);
     }
 
     /**
@@ -46,7 +47,11 @@ class PatientController extends Controller
      */
     public function show(Patient $patient)
     {
-        //
+        $stories = $patient->stories()->get()->all();
+        $appointments = $patient->appointments()->get()->all();
+        return view('patients.show')
+                ->with('stories', $stories)
+                ->with('appointments', $appointments);
     }
 
     /**

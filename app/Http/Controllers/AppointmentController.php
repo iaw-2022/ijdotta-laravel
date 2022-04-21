@@ -16,7 +16,8 @@ class AppointmentController extends Controller
      */
     public function index(Doctor $doctor)
     {
-        //
+        $appointments = Appointment::paginate(10);
+        return view('appointments.index')->with('appointments', $appointments);
     }
 
     /**

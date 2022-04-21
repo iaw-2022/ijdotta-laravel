@@ -14,8 +14,8 @@ class DoctorController extends Controller
      */
     public function index()
     {
-        $doctors = Doctor::all();
-        return view('doctors.index', ['doctors' => $doctors]);
+        $doctors = Doctor::paginate(10);
+        return view('doctors.index')->with('doctors', $doctors);
     }
 
     /**
