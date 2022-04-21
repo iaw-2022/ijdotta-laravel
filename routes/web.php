@@ -30,7 +30,7 @@ Route::get('/dashboard', function () {
 // Does not require auth currently.
 Route::resources([
     'doctors' => DoctorController::class,
-    'doctors.appointments' => AppointmentController::class,
+    'appointments' => AppointmentController::class,
     'doctors.appointmentspatterns' => AppointmentPatternController::class,
     'patients' => PatientController::class,
     'patients.stories' => StoryController::class,
