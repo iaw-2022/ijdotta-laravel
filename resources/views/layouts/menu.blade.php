@@ -11,7 +11,4 @@
     <a class="nav-link" href="{{route('appointments.index')}}">
         <i class="fas fa-calendar"></i><span>Appointments</span>
     </a>
-    <a class="nav-link" href="{{route('appointments.index')}}">
-        <i class="fas fa-calendar-edit"></i><span>Appointments Patterns</span>
-    </a>
 </li>
