@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\Doctor;
 use App\Models\Appointment;
+use App\Models\AppointmentPattern;
 use App\Models\Patient;
 
 class DatabaseSeeder extends Seeder
@@ -16,10 +17,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Doctor::factory()->count(5)->has(Appointment::factory()->count(3))->create();
+        $this->call(
+            UserSeeder::class
+        );
+
+        Doctor::factory()->count(5)
+                ->has(Appointment::factory()->count(3))
+                ->has(AppointmentPattern::factory()->count(3))
+                ->create();
         
         $this->call([
-            UserSeeder::class,
             PatientSeeder::class
         ]);
 
