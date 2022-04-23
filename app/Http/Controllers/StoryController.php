@@ -51,7 +51,11 @@ class StoryController extends Controller
      */
     public function show(Patient $patient, Story $story)
     {
-        //
+        $treatments = $story->treatments()->get()->all();
+        return view('stories.show')
+                ->with('patient', $patient)
+                ->with('story', $story)
+                ->with('treatments', $treatments);
     }
 
     /**
