@@ -3,30 +3,28 @@
 namespace App\Http\Controllers;
 
 use App\Models\AppointmentPattern;
-use App\Models\Doctor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class AppointmentPatternController extends Controller
+class DoctorAppointmentPatternsController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @param  \App\Models\Doctor  $doctor
      * @return \Illuminate\Http\Response
      */
-    public function index(Doctor $doctor)
+    public function index()
     {
-        $patterns = $doctor->appointmentPatterns()->get()->all();
-        return view('appointments-patterns.index')->with('patterns', $patterns);
+        $doctor_id = Auth::user()->doctor_id; //TODO will not work until the User model and migration is modified
+        
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @param  \App\Models\Doctor  $doctor
      * @return \Illuminate\Http\Response
      */
-    public function create(Doctor $doctor)
+    public function create()
     {
         //
     }
@@ -35,10 +33,9 @@ class AppointmentPatternController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Doctor  $doctor
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Doctor $doctor)
+    public function store(Request $request)
     {
         //
     }
@@ -46,11 +43,10 @@ class AppointmentPatternController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Doctor  $doctor
      * @param  \App\Models\AppointmentPattern  $appointmentPattern
      * @return \Illuminate\Http\Response
      */
-    public function show(Doctor $doctor, AppointmentPattern $appointmentPattern)
+    public function show(AppointmentPattern $appointmentPattern)
     {
         //
     }
@@ -58,11 +54,10 @@ class AppointmentPatternController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Doctor  $doctor
      * @param  \App\Models\AppointmentPattern  $appointmentPattern
      * @return \Illuminate\Http\Response
      */
-    public function edit(Doctor $doctor, AppointmentPattern $appointmentPattern)
+    public function edit(AppointmentPattern $appointmentPattern)
     {
         //
     }
@@ -71,11 +66,10 @@ class AppointmentPatternController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Doctor  $doctor
      * @param  \App\Models\AppointmentPattern  $appointmentPattern
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Doctor $doctor, AppointmentPattern $appointmentPattern)
+    public function update(Request $request, AppointmentPattern $appointmentPattern)
     {
         //
     }
@@ -83,11 +77,10 @@ class AppointmentPatternController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Doctor  $doctor
      * @param  \App\Models\AppointmentPattern  $appointmentPattern
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Doctor $doctor, AppointmentPattern $appointmentPattern)
+    public function destroy(AppointmentPattern $appointmentPattern)
     {
         //
     }
