@@ -49,9 +49,16 @@ class PatientController extends Controller
     {
         $stories = $patient->stories()->get()->all();
         $appointments = $patient->appointments()->get()->all();
+        $cancelableAppointments = [];
+        foreach ($appointments as $appointment) {
+            $cancelableAppointments[$appointment->id] = rand(0, 1) == 1;
+        }
+
         return view('patients.show')
+                ->with('patient', $patient)
                 ->with('stories', $stories)
-                ->with('appointments', $appointments);
+                ->with('appointments', $appointments)
+                ->with('cancellable', $cancelableAppointments);
     }
 
     /**

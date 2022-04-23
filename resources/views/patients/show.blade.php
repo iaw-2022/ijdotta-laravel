@@ -3,7 +3,7 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h3 class="page__heading">Patient profile</h3>
+            <h3 class="page__heading">{{ $patient->lastname }}, {{ $patient->name }} profile</h3>
         </div>
         <div class="section-body">
             <div class="row">
@@ -11,7 +11,7 @@
                     <div class="card">
                         <div class="card-body">
 
-                            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                            <ul class="nav nav-pills mb-3 d-flex justify-content-around" id="pills-tab" role="tablist">
                                 <li class="nav-item" role="presentation">
                                     <a class="nav-link active" id="pills-profile-tab" data-toggle="pill"
                                         href="#pills-profile" role="tab" aria-controls="pills-profile"
@@ -32,7 +32,58 @@
 
                                 {{-- Profile tab --}}
                                 <div class="tab-pane fade show active" id="pills-profile" role="tabpanel"
-                                    aria-labelledby="pills-profile-tab">...</div>
+                                    aria-labelledby="pills-profile-tab">
+
+                                    <table class="table table-bordered table-hover">
+                                        <thead>
+                                            <th scope="row">Id</th>
+                                            <th>{{$patient->id}}</th>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">
+                                                    Name
+                                                </th>
+                                                <td>
+                                                    {{ $patient->name }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">
+                                                    Lastname
+                                                </th>
+                                                <td>
+                                                    {{ $patient->lastname }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">
+                                                    Email
+                                                </th>
+                                                <td>
+                                                    {{ $patient->email }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">
+                                                    Health Isurance Company
+                                                </th>
+                                                <td>
+                                                    {{ $patient->health_insurance_company }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">
+                                                    Health Insurance Id
+                                                </th>
+                                                <td>
+                                                    {{ $patient->health_insurance_id }}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
                                 {{-- Stories tab --}}
                                 <div class="tab-pane fade" id="pills-stories" role="tabpanel"
                                     aria-labelledby="pills-stories-tab">
@@ -122,7 +173,7 @@
                                                             <i class="fas fa-pen mx-1"></i><span>Edit</span>
                                                         </a>
                                                         {!! Form::open(['method' => 'delete', 'route' => ['appointments.destroy', $appointment->id], 'style' => 'display:inline']) !!}
-                                                        {!! Form::button('<i class="fas fa-ban mx-1"></i>Cancel', ['type' => 'submit', 'class' => 'btn btn-danger']) !!}
+                                                        {!! Form::button('<i class="fas fa-ban mx-1"></i>Cancel', ['type' => 'submit', 'class' => 'btn btn-danger', $cancellable[$appointment->id]? 'disabled' : '']) !!}
                                                         {!! Form::close() !!}
                                                     </td>
                                                 </tr>
