@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Appointment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class AppointmentController extends Controller
+class DoctorAppointmentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +15,9 @@ class AppointmentController extends Controller
      */
     public function index()
     {
-        $appointments = Appointment::paginate(10);
-        return view('appointments.index')->with('appointments', $appointments);
+        $doctor = Auth::user()->doctor()->get()->first(); //TODO will not work until the User model and migration is modified
+        $appointments = $doctor->appointments()->get()->all();
+        return view('appointments.doctor-index')->with('appointments', $appointments);
     }
 
     /**
@@ -82,9 +84,5 @@ class AppointmentController extends Controller
     public function destroy(Appointment $appointment)
     {
         //
-    }
-
-    public static function isCancelable(Appointment $appointment) {
-        return rand(0, 1) == 1;
     }
 }
