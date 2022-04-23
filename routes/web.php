@@ -7,6 +7,8 @@ use App\Http\Controllers\PatientController;
 use App\Http\Controllers\StoryController;
 use App\Http\Controllers\TreatmentController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -34,7 +36,7 @@ Route::resources([
     'doctors.appointmentspatterns' => AppointmentPatternController::class,
     'patients' => PatientController::class,
     'patients.stories' => StoryController::class,
-    'patients.treatments' => TreatmentController::class,
+    'patients.stories.treatments' => TreatmentController::class,
 ]);
 
 Route::get('/main', function() {
