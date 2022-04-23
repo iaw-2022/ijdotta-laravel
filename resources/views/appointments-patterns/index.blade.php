@@ -3,7 +3,7 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h3 class="page__heading">Appointments</h3>
+            <h3 class="page__heading">Patterns</h3>
         </div>
         <div class="section-body">
             <div class="row">
@@ -42,7 +42,7 @@
                                             <td>{{ $pattern->end_date }}</td>
                                             <td>{{ $pattern->initial_time }}</td>
                                             <td>{{ $pattern->end_time }}</td>
-                                            <td>{{ $pattern->duration }}</td>
+                                            <td>{{ $pattern->appointment_duration }}</td>
                                             <td>{{ $pattern->days }}</td>
                                             <td class="action-buttons-td">
                                                 <a
