@@ -19,7 +19,7 @@
                         <div class="card-body overflow-auto">
 
 
-                            <table class="table">
+                            <table class="table table-hover">
                                 <thead>
                                     <th scope="col">Id</th>
                                     <th scope="col">Date</th>
@@ -32,8 +32,14 @@
                                 <tbody>
                                     @foreach ($appointments as $appointment)
                                         @php
-                                            $doctor = $appointment->doctor()->get()->first();
-                                            $patient = $appointment->patient()->get()->first();
+                                            $doctor = $appointment
+                                                ->doctor()
+                                                ->get()
+                                                ->first();
+                                            $patient = $appointment
+                                                ->patient()
+                                                ->get()
+                                                ->first();
                                         @endphp
                                         <tr>
                                             <th scope="row">{{ $appointment->id }}</th>
@@ -42,21 +48,29 @@
                                             <td>{{ $appointment->end_time }}</td>
                                             <td>
                                                 @if ($doctor)
-                                                    {{$doctor->lastname, $doctor->name}}
+                                                    <a class="btn"
+                                                        href="{{ route('doctors.show', $doctor->id) }}">
+                                                        <i
+                                                            class="fas fa-link mx-3"></i><span>{{ $doctor->lastname}}, {{$doctor->name }}</span>
+                                                    </a>
                                                 @else
                                                     Unknown doctor
                                                 @endif
                                             </td>
                                             <td>
                                                 @if ($patient)
-                                                    {{$patient->lastname, patient->name}}
+                                                    <a class="btn"
+                                                        href="{{ route('patients.show', $patient->id) }}">
+                                                        <i
+                                                            class="fas fa-link mx-3"></i><span>{{ $patient->lastname}}, {{$patient->name }}</span>
+                                                    </a>
                                                 @else
                                                     Free
                                                 @endif
                                             </td>
                                             <td class="action-buttons-td">
-                                                <a
-                                                    class="btn btn-warning" href="{{ route('appointments.edit', $appointment->id) }}">
+                                                <a class="btn btn-warning"
+                                                    href="{{ route('appointments.edit', $appointment->id) }}">
                                                     <i class="fas fa-pen mx-1"></i><span>Edit</span>
                                                 </a>
                                                 {!! Form::open(['method' => 'delete', 'route' => ['appointments.destroy', $appointment->id], 'style' => 'display:inline']) !!}
