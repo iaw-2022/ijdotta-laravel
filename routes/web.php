@@ -2,7 +2,11 @@
 
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\AppointmentPatternController;
+use App\Http\Controllers\DoctorAppointmentController;
+use App\Http\Controllers\DoctorAppointmentPatternsController;
 use App\Http\Controllers\DoctorController;
+use App\Http\Controllers\DoctorPatientController;
+use App\Http\Controllers\DoctorStoryController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\StoryController;
 use App\Http\Controllers\TreatmentController;
@@ -30,20 +34,37 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 // Does not require auth currently.
-Route::resources([
-    'doctors' => DoctorController::class,
-    'appointments' => AppointmentController::class,
-    'doctors.appointmentspatterns' => AppointmentPatternController::class,
-    'patients' => PatientController::class,
-    'patients.stories' => StoryController::class,
-    'patients.stories.treatments' => TreatmentController::class,
-]);
 
-Route::get('/main', function() {
+Route::name('')->group(function() {
+    Route::resources([
+        // 'doctors' => DoctorController::class,
+        // 'doctors.appointmentspatterns' => AppointmentPatternController::class,
+        'appointments' => DoctorAppointmentController::class,
+        'appointmentspatterns' => DoctorAppointmentPatternsController::class,
+        'patients' => DoctorPatientController::class,
+        'patients.stories' => DoctorStoryController::class,
+        'patients.stories.treatments' => TreatmentController::class,
+    ]);
+
+});
+
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::resources([
+        'doctors' => DoctorController::class,
+        'doctors.appointmentspatterns' => AppointmentPatternController::class,
+        'appointments' => AppointmentController::class,
+        'patients' => PatientController::class,
+        'patients.stories' => StoryController::class,
+        'patients.stories.treatments' => TreatmentController::class
+    ]);
+});
+
+
+Route::get('/main', function () {
     return view('layouts.main');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

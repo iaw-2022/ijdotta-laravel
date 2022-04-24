@@ -13,19 +13,19 @@
 
                             <div class="row my-3">
                                 <div class="col-6 d-flex justify-content-start">
-                                    <a class="btn btn-primary mx-2" href="{{ route('appointments.index', ['doctor_id' => $doctor->id]) }}">
+                                    <a class="btn btn-primary mx-2" href="{{ route('admin.appointments.index', ['doctor_id' => $doctor->id]) }}">
                                         <i class="fas fa-calendar mx-3"></i><span>Appointments</span>
                                     </a>
                                     <a class="btn btn-info mx-2"
-                                        href="{{ route('doctors.appointmentspatterns.index', $doctor->id) }}">
+                                        href="{{ route('admin.doctors.appointmentspatterns.index', $doctor->id) }}">
                                         <i class="fas fa-tools mx-3"></i><span>Appointments Patterns</span>
                                     </a>
                                 </div>
                                 <div class="col-6 d-flex justify-content-end">
-                                    <a class="btn btn-warning mx-2" href="{{ route('doctors.edit', $doctor->id) }}">
+                                    <a class="btn btn-warning mx-2" href="{{ route('admin.doctors.edit', $doctor->id) }}">
                                         <i class="fas fa-pen mx-1"></i><span>Edit</span>
                                     </a>
-                                    {!! Form::open(['method' => 'delete', 'route' => ['doctors.destroy', $doctor->id], 'style' => 'display:inline']) !!}
+                                    {!! Form::open(['method' => 'delete', 'route' => ['admin.doctors.destroy', $doctor->id], 'style' => 'display:inline']) !!}
                                     {!! Form::button('<i class="fa fa-trash mx-1"></i>Delete', ['type' => 'submit', 'class' => 'btn btn-danger mx-2']) !!}
                                     {!! Form::close() !!}
                                 </div>

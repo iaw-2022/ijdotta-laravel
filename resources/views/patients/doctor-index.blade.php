@@ -17,7 +17,7 @@
                     <div class="card">
 
                         <div class="card-body pb-0">
-                            <a class="btn btn-success my-3" href="{{ route('admin.patients.create') }}">
+                            <a class="btn btn-success my-3" href="{{ route('patients.create') }}">
                                 <i class="fas fa-plus-circle mx-1"></i><span>Create</span>
                             </a>
                         </div>
@@ -46,14 +46,14 @@
                                             <td>{{ $patient->health_insurance_id }}</td>
                                             <td class="action-buttons-td">
                                                 <a
-                                                    class="btn btn-primary" href="{{ route('admin.patients.show', $patient->id) }}">
+                                                    class="btn btn-primary" href="{{ route('patients.show', $patient->id) }}">
                                                     <i class="fas fa-eye mx-1"></i><span>Show</span>
                                                 </a>
                                                 <a
-                                                    class="btn btn-warning" href="{{ route('admin.patients.edit', $patient->id) }}">
+                                                    class="btn btn-warning" href="{{ route('patients.edit', $patient->id) }}">
                                                     <i class="fas fa-pen mx-1"></i><span>Edit</span>
                                                 </a>
-                                                {!! Form::open(['method' => 'delete', 'route' => ['admin.patients.destroy', $patient->id], 'style' => 'display:inline']) !!}
+                                                {!! Form::open(['method' => 'delete', 'route' => ['patients.destroy', $patient->id], 'style' => 'display:inline']) !!}
                                                 {!! Form::button('<i class="fa fa-trash mx-1"></i>Delete', ['type' => 'submit', 'class' => 'btn btn-danger']) !!}
                                                 {!! Form::close() !!}
                                             </td>

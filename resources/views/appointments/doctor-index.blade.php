@@ -40,7 +40,7 @@
                                             <td>{{ $appointment->end_time }}</td>
                                             <td>
                                                 @if ($patient)
-                                                    {{$patient->lastname, patient->name}}
+                                                    {{$patient->lastname, $patient->name}}
                                                 @else
                                                     Free
                                                 @endif

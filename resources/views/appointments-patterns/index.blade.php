@@ -46,10 +46,10 @@
                                             <td>{{ $pattern->days }}</td>
                                             <td class="action-buttons-td">
                                                 <a
-                                                    class="btn btn-warning" href="{{ route('doctors.appointmentspatterns.edit', [$doctor->id, $pattern->id]) }}">
+                                                    class="btn btn-warning" href="{{ route('admin.doctors.appointmentspatterns.edit', [$doctor->id, $pattern->id]) }}">
                                                     <i class="fas fa-pen mx-1"></i><span>Edit</span>
                                                 </a>
-                                                {!! Form::open(['method' => 'delete', 'route' => ['doctors.appointmentspatterns.destroy', [$doctor->id, $pattern->id]], 'style' => 'display:inline']) !!}
+                                                {!! Form::open(['method' => 'delete', 'route' => ['admin.doctors.appointmentspatterns.destroy', [$doctor->id, $pattern->id]], 'style' => 'display:inline']) !!}
                                                 {!! Form::button('<i class="fa fa-trash mx-1"></i>Delete', ['type' => 'submit', 'class' => 'btn btn-danger']) !!}
                                                 {!! Form::close() !!}
                                             </td>
