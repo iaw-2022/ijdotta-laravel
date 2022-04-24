@@ -15,7 +15,7 @@ class DoctorAppointmentController extends Controller
      */
     public function index()
     {
-        $doctor = Auth::user()->doctor()->get()->first(); //TODO will not work until the User model and migration is modified
+        $doctor = Auth::user()->doctor()->get()->first();
         $appointments = $doctor->appointments()->get()->all();
         return view('appointments.doctor-index')->with('appointments', $appointments);
     }

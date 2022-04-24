@@ -15,8 +15,9 @@ class DoctorAppointmentPatternsController extends Controller
      */
     public function index()
     {
-        $doctor_id = Auth::user()->doctor_id; //TODO will not work until the User model and migration is modified
-        
+        $doctor = Auth::user()->doctor()->get()->first();
+        $patterns = $doctor->appointmentPatterns()->get()->all();
+        return view('appointments-patterns.doctor-index', compact('doctor', 'patterns'));
     }
 
     /**
