@@ -11,18 +11,18 @@
                     <div class="card">
                         <div class="card-body">
 
-                            <ul class="nav nav-pills mb-3 d-flex justify-content-around" id="pills-tab" role="tablist">
-                                <li class="nav-item" role="presentation">
+                            <ul class="nav nav-pills mb-3 d-flex justify-content-start" id="pills-tab" role="tablist">
+                                <li class="nav-item mx-2" role="presentation">
                                     <a class="nav-link active" id="pills-profile-tab" data-toggle="pill"
                                         href="#pills-profile" role="tab" aria-controls="pills-profile"
                                         aria-selected="false">Profile</a>
                                 </li>
-                                <li class="nav-item" role="presentation">
+                                <li class="nav-item mx-2" role="presentation">
                                     <a class="nav-link" id="pills-stories-tab" data-toggle="pill"
                                         href="#pills-stories" role="tab" aria-controls="pills-stories"
                                         aria-selected="true">Stories</a>
                                 </li>
-                                <li class="nav-item" role="presentation">
+                                <li class="nav-item mx-2" role="presentation">
                                     <a class="nav-link" id="pills-appointments-tab" data-toggle="pill"
                                         href="#pills-appointments" role="tab" aria-controls="pills-appointments"
                                         aria-selected="false">Appointments</a>

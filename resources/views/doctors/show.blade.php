@@ -13,7 +13,7 @@
 
                             <div class="row my-3">
                                 <div class="col-6 d-flex justify-content-start">
-                                    <a class="btn btn-primary mx-2" href="appointments.index">
+                                    <a class="btn btn-primary mx-2" href="{{ route('appointments.index', ['doctor_id' => $doctor->id]) }}">
                                         <i class="fas fa-calendar mx-3"></i><span>Appointments</span>
                                     </a>
                                     <a class="btn btn-info mx-2"
