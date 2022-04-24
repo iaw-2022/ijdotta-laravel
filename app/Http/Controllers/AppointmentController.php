@@ -12,9 +12,15 @@ class AppointmentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $appointments = Appointment::paginate(10);
+        $doctor_id = $request->query('doctor_id');
+        if ($doctor_id) {
+            $appointments = Appointment::where('doctor_id', $doctor_id)->paginate(10)->sortByDesc('date');
+        }
+        else {
+            $appointments = Appointment::paginate(10)->sortByDesc('date');
+        }
         return view('appointments.index')->with('appointments', $appointments);
     }
 
