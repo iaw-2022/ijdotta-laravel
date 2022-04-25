@@ -1,11 +1,5 @@
 @extends('layouts.app')
 
-@section('css')
-    {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet"/> --}}
-    {{-- <link href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css" rel="stylesheet" /> --}}
-    <link href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
-@endsection
-
 @section('content')
     <section class="section">
         <div class="section-header">
@@ -17,13 +11,14 @@
                     <div class="card">
 
                         <div class="card-body pb-0">
-                            <a class="btn btn-success my-3" href="{{ route('patients.create') }}">
+                            <a class="btn btn-success my-3" href="{{ route('admin.users.create') }}">
                                 <i class="fas fa-plus-circle mx-1"></i><span>Create</span>
                             </a>
                         </div>
 
                         <div class="card-body overflow-auto">
-                            {{-- 
+
+                                {{-- 
                                 $table->id();
                                 $table->foreignId('doctor_id')->nullable();
                                 $table->string('role')->default("doctor");
@@ -37,31 +32,41 @@
                             <table class="table">
                                 <thead>
                                     <th scope="col">Id</th>
+                                    <th scope="col">Role</th>
                                     <th scope="col">Name</th>
+                                    <th scope="col">Related doctor</th>
                                     <th scope="col">Email</th>
-                                    <th scope="col">Rol</th>
-                                    <th scope="col">Doctor</th>
                                     <th scope="col">Actions</th>
                                 </thead>
                                 <tbody>
-                                    @foreach ($patients as $patient)
+                                    @foreach ($users as $user)
                                         <tr>
-                                            <th scope="row">{{ $patient->id }}</th>
-                                            <td>{{ $patient->name }}</td>
-                                            <td>{{ $patient->lastname }}</td>
-                                            <td>{{ $patient->email }}</td>
-                                            <td>{{ $patient->health_insurance_company }}</td>
-                                            <td>{{ $patient->health_insurance_id }}</td>
+                                            <th scope="row">{{ $user->id }}</th>
+                                            <td>{{ $user->role }}</td>
+                                            <td>{{ $user->name }}</td>
+                                            @php
+                                                $rel_doctor = $user->doctor()->get()->first();
+                                            @endphp
+                                            <td>
+                                                @if ($rel_doctor)
+                                                    <a class="btn" href="{{route('admin.doctors.show', $rel_doctor->id)}}">
+                                                        <i class="fas fa-user-md mx-3"></i><span>{{$rel_doctor->lastname}}, {{$rel_doctor->name}}</span>
+                                                    </a>
+                                                @else
+                                                    -
+                                                @endif
+                                            </td>
+                                            <td>{{ $user->email }}</td>
                                             <td class="action-buttons-td">
                                                 <a
-                                                    class="btn btn-primary" href="{{ route('patients.show', $patient->id) }}">
+                                                    class="btn btn-primary" href="{{ route('admin.users.show', $user->id) }}">
                                                     <i class="fas fa-eye mx-1"></i><span>Show</span>
                                                 </a>
                                                 <a
-                                                    class="btn btn-warning" href="{{ route('patients.edit', $patient->id) }}">
+                                                    class="btn btn-warning" href="{{ route('admin.users.edit', $user->id) }}">
                                                     <i class="fas fa-pen mx-1"></i><span>Edit</span>
                                                 </a>
-                                                {!! Form::open(['method' => 'delete', 'route' => ['patients.destroy', $patient->id], 'style' => 'display:inline']) !!}
+                                                {!! Form::open(['method' => 'delete', 'route' => ['admin.users.destroy', $user->id], 'style' => 'display:inline']) !!}
                                                 {!! Form::button('<i class="fa fa-trash mx-1"></i>Delete', ['type' => 'submit', 'class' => 'btn btn-danger']) !!}
                                                 {!! Form::close() !!}
                                             </td>
@@ -69,10 +74,10 @@
                                     @endforeach()
                                 </tbody>
                             </table>
-
+                            <div class="pagination d-flex justify-content-start">
+                                {{ $users->links() }}
+                            </div>
                         </div>
-
-
                     </div>
                 </div>
             </div>

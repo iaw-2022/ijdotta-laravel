@@ -10,6 +10,7 @@ use App\Http\Controllers\DoctorStoryController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\StoryController;
 use App\Http\Controllers\TreatmentController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -55,7 +56,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         'appointments' => AppointmentController::class,
         'patients' => PatientController::class,
         'patients.stories' => StoryController::class,
-        'patients.stories.treatments' => TreatmentController::class
+        'patients.stories.treatments' => TreatmentController::class,
+        'users' => UserController::class
     ]);
 });
 

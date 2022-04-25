@@ -16,6 +16,9 @@
     <a class="nav-link" href="{{route('admin.appointments.index')}}">
         <i class="fas fa-calendar"></i><span>Appointments</span>
     </a>
+    <a class="nav-link" href="{{route('admin.users.index')}}">
+        <i class="fas fa-users"></i><span>Users</span>
+    </a>
 
     {{-- Doctor links --}}
     <a class="nav-link btn" href="#">
