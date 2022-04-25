@@ -19,7 +19,7 @@
 
                         <div class="card-body overflow-auto">
 
-                            <table class="table">
+                            <table class="table table-hover">
                                 <thead>
                                     <th scope="col">Id</th>
                                     <th scope="col">Initial date</th>

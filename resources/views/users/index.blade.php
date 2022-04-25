@@ -29,7 +29,7 @@
                                 $table->rememberToken();
                                 $table->timestamps();
                                 --}}
-                            <table class="table">
+                            <table class="table table-hover">
                                 <thead>
                                     <th scope="col">Id</th>
                                     <th scope="col">Role</th>

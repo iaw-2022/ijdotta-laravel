@@ -133,7 +133,7 @@
                                 {{-- Appointments tab --}}
                                 <div class="tab-pane fade overflow-auto" id="pills-appointments" role="tabpanel"
                                     aria-labelledby="pills-appointments-tab">
-                                    <table class="table">
+                                    <table class="table table-hover">
                                         <thead>
                                             <th scope="col" class="d-none">Id</th>
                                             <th scope="col">Date</th>

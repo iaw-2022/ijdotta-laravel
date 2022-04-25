@@ -25,7 +25,7 @@
                         <div class="card-body overflow-auto">
 
 
-                            <table id="patients" class="table">
+                            <table id="patients" class="table table-hover">
                                 <thead>
                                     <th scope="col">Id</th>
                                     <th scope="col">Name</th>
