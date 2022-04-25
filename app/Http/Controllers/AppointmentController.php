@@ -16,10 +16,10 @@ class AppointmentController extends Controller
     {
         $doctor_id = $request->query('doctor_id');
         if ($doctor_id) {
-            $appointments = Appointment::where('doctor_id', $doctor_id)->paginate(10)->sortByDesc('date');
+            $appointments = Appointment::where('doctor_id', $doctor_id)->paginate(10);
         }
         else {
-            $appointments = Appointment::paginate(10)->sortByDesc('date');
+            $appointments = Appointment::paginate(10);
         }
         return view('appointments.index')->with('appointments', $appointments);
     }
