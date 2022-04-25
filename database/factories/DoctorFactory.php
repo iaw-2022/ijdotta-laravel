@@ -19,11 +19,9 @@ class DoctorFactory extends Factory
     {
         return [
             'id' => $this->faker->numberBetween(10000, 99999),
-            'user_id' => User::all()->pluck('id')->random(1)->first(),
+            'user_id' => User::factory()->createOne(['role' => 'doctor', 'password' => bcrypt('12345678')])->id,
             'name' => $this->faker->name(),
             'lastname' => $this->faker->lastName(),
-            'email' => $this->faker->unique()->safeEmail(),
-            'password' => bcrypt('12345678'),
         ];
     }
 }
