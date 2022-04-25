@@ -18,6 +18,7 @@ class AppointmentPatternFactory extends Factory
     {
         return [
             'doctor_id' => Doctor::all()->pluck('id')->random(1)->first(),
+            'appointment_id' => 555,
             'initial_date' => $this->faker->date(),
             'end_date' => $this->faker->date(),
             'initial_time' => $this->faker->time(),
