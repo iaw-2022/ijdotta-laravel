@@ -14,8 +14,13 @@
                             <div class="card p-3 rounded bg-light">
                                 <div class="row">
                                     <div class="col-9">
+                                        @php
+                                            $doctor = $story->doctor()->get()->first();
+                                        @endphp
                                         <h1>{{ $story->date }}</h1>
-                                        <h2>{{ $story->doctor()->get()->first()->lastname }}</h2>
+                                        <a class="btn" href="{{route('admin.doctors.show', $doctor->id)}}">
+                                            <i class="fas fa-user-md mx-3"></i><span>{{$doctor->lastname}}, {{$doctor->name}}</span>
+                                        </a>
                                         <p>{{ $story->description }}</p>
                                     </div>
                                     <div class="col-3 d-flex justify-content-end align-items-start">
@@ -31,9 +36,13 @@
                                 
                             </div>
 
-                            <h1>Treatments</h1>
+                            <div class="row mx-3">
+                                <div class="col-12">
+                                    <h1>Treatments</h1>
+                                </div>
+                            </div>
                             @foreach ($treatments as $treatment)
-                                <div class="row my-3">
+                                <div class="row m-3">
                                     <div class="col-9">
                                         <h3>{{ $treatment->title }} </h3>
                                         {{ $treatment->description }}
