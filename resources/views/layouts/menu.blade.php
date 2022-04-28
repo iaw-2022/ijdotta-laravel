@@ -1,6 +1,6 @@
 <li class="side-menus {{ Request::is('home') ? 'active' : '' }}">
     <a class="nav-link" href="/dashboard">
-        <i class=" fas fa-building"></i><span>Dashboard</span>
+        <i class="fas fa-home"></i><span>Home</span>
     </a>
     
     {{-- Admin links --}}
