@@ -4,9 +4,10 @@
     </a>
     
     {{-- Admin links --}}
-    <a class="nav-link btn" href="#">
+    @if (Auth::user()->role == 'admin')
+    {{-- <a class="nav-link btn" href="#">
         <span>Admin links</span>
-    </a>
+    </a> --}}
     <a class="nav-link" href="{{route('admin.patients.index')}}">
         <i class="fas fa-user-injured"></i><span>Patients</span>
     </a>
@@ -19,11 +20,12 @@
     <a class="nav-link" href="{{route('admin.users.index')}}">
         <i class="fas fa-users"></i><span>Users</span>
     </a>
-
+    @endif
+    @if (Auth::user()->role == 'doctor')
     {{-- Doctor links --}}
-    <a class="nav-link btn" href="#">
-        <span>Doctor links</span>
-    </a>
+    {{-- <a class="nav-link btn" href="#"> --}}
+        {{-- <span>Doctor links</span> --}}
+    {{-- </a> --}}
     <a class="nav-link" href="{{route('patients.index')}}">
         <i class="fas fa-user-injured"></i><span>Patients</span>
     </a>
@@ -33,4 +35,5 @@
     <a class="nav-link" href="{{route('appointmentspatterns.index')}}">
         <i class="fas fa-tools"></i><span>Appointments Patterns</span>
     </a>
+    @endif
 </li>
