@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('appointment_patterns', function (Blueprint $table) {
             $table->id();
             $table->foreignId('doctor_id');
-            $table->foreignId('appointment_id');
             $table->date('initial_date');
             $table->date('end_date');
             $table->time('initial_time');
