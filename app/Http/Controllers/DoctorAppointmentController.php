@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Appointment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
+use DateTimeZone;
 
 class DoctorAppointmentController extends Controller
 {
@@ -84,5 +86,13 @@ class DoctorAppointmentController extends Controller
     public function destroy(Appointment $appointment)
     {
         //
+    }
+
+    public static function isCancelable(Appointment $appointment) {
+        $tz = new DateTimeZone('America/Argentina/Buenos_Aires');
+        $today = Carbon::now($tz);
+        $apDate = Carbon::createFromFormat('Y-m-d', $appointment->date, $tz);
+        clock()->info('apdate: '.$apDate->toDateString());
+        return $today->greaterThan($apDate);
     }
 }
