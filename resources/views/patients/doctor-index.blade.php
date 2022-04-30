@@ -62,10 +62,6 @@
                                 </tbody>
                             </table>
 
-                            <div class="pagination d-flex justify-content-start">
-                                {{ $patients->links() }}
-                            </div>
-
                         </div>
 
 

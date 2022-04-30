@@ -45,12 +45,12 @@
                                             <td>{{ $patient->health_insurance_company }}</td>
                                             <td>{{ $patient->health_insurance_id }}</td>
                                             <td class="action-buttons-td">
-                                                <a
-                                                    class="btn btn-primary" href="{{ route('admin.patients.show', $patient->id) }}">
+                                                <a class="btn btn-primary"
+                                                    href="{{ route('admin.patients.show', $patient->id) }}">
                                                     <i class="fas fa-eye mx-1"></i><span>Show</span>
                                                 </a>
-                                                <a
-                                                    class="btn btn-warning" href="{{ route('admin.patients.edit', $patient->id) }}">
+                                                <a class="btn btn-warning"
+                                                    href="{{ route('admin.patients.edit', $patient->id) }}">
                                                     <i class="fas fa-pen mx-1"></i><span>Edit</span>
                                                 </a>
                                                 {!! Form::open(['method' => 'delete', 'route' => ['admin.patients.destroy', $patient->id], 'style' => 'display:inline']) !!}
@@ -61,10 +61,6 @@
                                     @endforeach()
                                 </tbody>
                             </table>
-
-                            <div class="pagination d-flex justify-content-start">
-                                {{ $patients->links() }}
-                            </div>
 
                         </div>
 
