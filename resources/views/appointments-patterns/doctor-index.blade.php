@@ -39,7 +39,7 @@
                                             <td>{{ $pattern->initial_time }}</td>
                                             <td>{{ $pattern->end_time }}</td>
                                             <td>{{ $pattern->appointment_duration }}</td>
-                                            <td>{{ implode(" ", ($pattern->days)['days'])  }}</td>
+                                            <td>{{ implode(" ", ($pattern->days))  }}</td>
                                             <td class="action-buttons-td">
                                                 <a
                                                     class="btn btn-warning" href="{{ route('appointmentspatterns.edit', [$pattern->id]) }}">
