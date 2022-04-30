@@ -6,7 +6,6 @@ use Illuminate\Database\Seeder;
 use App\Models\Doctor;
 use App\Models\Appointment;
 use App\Models\AppointmentPattern;
-use App\Models\Patient;
 
 class DatabaseSeeder extends Seeder
 {
@@ -21,14 +20,17 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class
         );
 
-        Doctor::factory()->count(5)
+        Doctor::factory()->count(2)
                 ->has(Appointment::factory()->count(3))
-                ->has(AppointmentPattern::factory()->count(3))
+                ->has(AppointmentPattern::factory()->count(2))
                 ->create();
         
         $this->call([
-            PatientSeeder::class
+            PatientSeeder::class,
+            SimpsonsSeeder::class
         ]);
+
+        
 
     }
 }
