@@ -32,7 +32,7 @@ class AppointmentPatternFactory extends Factory
             'initial_time' => $date->toTimeString(),
             'end_time' => $endDate->toTimeString(),
             'appointment_duration' => '00:'.rand(20, 30).':00',
-            'days' => '{"days": ["Mon", "Tue", "Wed"]}'
+            'days' => ['Mon', 'Tue', 'Wed'],
         ];
     }
 }

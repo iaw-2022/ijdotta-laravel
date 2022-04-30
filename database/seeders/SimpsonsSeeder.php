@@ -50,7 +50,7 @@ class SimpsonsSeeder extends Seeder
             'initial_time' => $initial_date->toTimeString(),
             'end_time' => $end_date->toTimeString(),
             'appointment_duration' => '00:30:00',
-            'days' => '{"days": ["Mon", "Tue", "Wed"]}'
+            'days' => ['Mon', 'Tue', 'Wed'],
         ]);
 
         $current_date = $initial_date->copy();
