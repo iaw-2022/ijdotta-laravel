@@ -167,7 +167,7 @@
                                                             <i class="fas fa-pen mx-1"></i><span>Edit</span>
                                                         </a>
                                                         {!! Form::open(['method' => 'delete', 'route' => ['admin.appointments.destroy', $appointment->id], 'style' => 'display:inline']) !!}
-                                                        {!! Form::button('<i class="fas fa-ban mx-1"></i>Cancel', ['type' => 'submit', 'class' => 'btn btn-danger', $cancellable[$appointment->id] ? 'disabled' : '']) !!}
+                                                        {!! Form::button('<i class="fa fa-trash mx-1"></i>Delete', ['type' => 'submit', 'class' => 'btn btn-danger']) !!}
                                                         {!! Form::close() !!}
                                                     </td>
                                                 </tr>

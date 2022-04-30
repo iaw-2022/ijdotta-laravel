@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Appointment;
 use App\Models\Patient;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class PatientController extends Controller
      */
     public function index()
     {
-        $patients = Patient::paginate(10);
+        $patients = Patient::all();
         return view('patients.index')->with('patients', $patients);
     }
 
@@ -49,16 +50,11 @@ class PatientController extends Controller
     {
         $stories = $patient->stories()->get()->all();
         $appointments = $patient->appointments()->get()->all();
-        $cancelableAppointments = [];
-        foreach ($appointments as $appointment) {
-            $cancelableAppointments[$appointment->id] = rand(0, 1) == 1;
-        }
 
         return view('patients.show')
                 ->with('patient', $patient)
                 ->with('stories', $stories)
-                ->with('appointments', $appointments)
-                ->with('cancellable', $cancelableAppointments);
+                ->with('appointments', $appointments);
     }
 
     /**

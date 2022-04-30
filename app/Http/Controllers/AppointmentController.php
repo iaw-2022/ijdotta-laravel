@@ -90,7 +90,4 @@ class AppointmentController extends Controller
         //
     }
 
-    public static function isCancelable(Appointment $appointment) {
-        return rand(0, 1) == 1;
-    }
 }
