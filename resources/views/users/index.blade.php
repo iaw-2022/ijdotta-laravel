@@ -18,17 +18,6 @@
 
                         <div class="card-body overflow-auto">
 
-                                {{-- 
-                                $table->id();
-                                $table->foreignId('doctor_id')->nullable();
-                                $table->string('role')->default("doctor");
-                                $table->string('name');
-                                $table->string('email')->unique();
-                                $table->timestamp('email_verified_at')->nullable();
-                                $table->string('password');
-                                $table->rememberToken();
-                                $table->timestamps();
-                                --}}
                             <table class="table table-hover">
                                 <thead>
                                     <th scope="col">Id</th>
@@ -58,10 +47,6 @@
                                             </td>
                                             <td>{{ $user->email }}</td>
                                             <td class="action-buttons-td">
-                                                <a
-                                                    class="btn btn-primary" href="{{ route('admin.users.show', $user->id) }}">
-                                                    <i class="fas fa-eye mx-1"></i><span>Show</span>
-                                                </a>
                                                 <a
                                                     class="btn btn-warning" href="{{ route('admin.users.edit', $user->id) }}">
                                                     <i class="fas fa-pen mx-1"></i><span>Edit</span>
