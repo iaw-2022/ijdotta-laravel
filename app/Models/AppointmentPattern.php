@@ -9,6 +9,10 @@ class AppointmentPattern extends Model
 {
     use HasFactory;
 
+    protected $casts = [
+        'days' => 'array',
+    ];
+
     public function doctor() {
         return $this->belongsTo(Doctor::class);
     }
