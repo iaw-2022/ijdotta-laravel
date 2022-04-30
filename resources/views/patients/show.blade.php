@@ -151,7 +151,11 @@
                                                     <td>{{ $appointment->end_time }}</td>
                                                     <td>
                                                         @if ($doctor)
-                                                            {{ $doctor->lastname, $doctor->name }}
+                                                            <a class="btn"
+                                                                href="{{ route('admin.doctors.show', $doctor->id) }}">
+                                                                <i class="fas fa-user-md mx-3"></i><span>{{ $doctor->lastname }},
+                                                                    {{ $doctor->name }}</span>
+                                                            </a>
                                                         @else
                                                             Unknown doctor
                                                         @endif

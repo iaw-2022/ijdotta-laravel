@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('css')
+    <link href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+@endsection
+
 @section('content')
     <section class="section">
         <div class="section-header">
@@ -19,7 +23,7 @@
                         <div class="card-body overflow-auto">
 
 
-                            <table class="table table-hover">
+                            <table id="appointments" class="table table-hover">
                                 <thead>
                                     <th scope="col">Id</th>
                                     <th scope="col">Date</th>
@@ -69,4 +73,15 @@
             </div>
         </div>
     </section>
+@endsection
+
+@section('page_js')
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#appointments').DataTable();
+        });
+    </script>
 @endsection

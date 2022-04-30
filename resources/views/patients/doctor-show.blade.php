@@ -37,7 +37,7 @@
                                     <table class="table table-bordered table-hover">
                                         <thead>
                                             <th scope="row">Id</th>
-                                            <th>{{$patient->id}}</th>
+                                            <th>{{ $patient->id }}</th>
                                         </thead>
                                         <tbody>
                                             <tr>
@@ -107,16 +107,16 @@
                                                     <td style="width:70%">{{ $story->description }}</td>
                                                     <td>
                                                         <a class="btn btn-primary"
-                                                    href="{{ route('patients.stories.show', [$patient->id, $story->id]) }}">
-                                                    <i class="fas fa-eye mx-1"></i><span>Show</span>
-                                                </a>
-                                                <a class="btn btn-warning"
-                                                    href="{{ route('patients.stories.edit', [$patient->id, $story->id]) }}">
-                                                    <i class="fas fa-pen mx-1"></i><span>Edit</span>
-                                                </a>
-                                                {!! Form::open(['method' => 'delete', 'route' => ['patients.stories.destroy', [$patient->id, $story->id]], 'style' => 'display:inline']) !!}
-                                                {!! Form::button('<i class="fa fa-trash mx-1"></i>Delete', ['type' => 'submit', 'class' => 'btn btn-danger']) !!}
-                                                {!! Form::close() !!}
+                                                            href="{{ route('patients.stories.show', [$patient->id, $story->id]) }}">
+                                                            <i class="fas fa-eye mx-1"></i><span>Show</span>
+                                                        </a>
+                                                        <a class="btn btn-warning"
+                                                            href="{{ route('patients.stories.edit', [$patient->id, $story->id]) }}">
+                                                            <i class="fas fa-pen mx-1"></i><span>Edit</span>
+                                                        </a>
+                                                        {!! Form::open(['method' => 'delete', 'route' => ['patients.stories.destroy', [$patient->id, $story->id]], 'style' => 'display:inline']) !!}
+                                                        {!! Form::button('<i class="fa fa-trash mx-1"></i>Delete', ['type' => 'submit', 'class' => 'btn btn-danger']) !!}
+                                                        {!! Form::close() !!}
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -151,7 +151,11 @@
                                                     <td>{{ $appointment->end_time }}</td>
                                                     <td>
                                                         @if ($doctor)
-                                                            {{ $doctor->lastname, $doctor->name }}
+                                                            <a class="btn"
+                                                                href="{{ route('doctors.show', $doctor->id) }}">
+                                                                <i class="fas fa-user-md mx-3"></i><span>{{ $doctor->lastname }},
+                                                                    {{ $doctor->name }}</span>
+                                                            </a>
                                                         @else
                                                             Unknown doctor
                                                         @endif
@@ -167,7 +171,7 @@
                                                             <i class="fas fa-pen mx-1"></i><span>Edit</span>
                                                         </a>
                                                         {!! Form::open(['method' => 'delete', 'route' => ['appointments.destroy', $appointment->id], 'style' => 'display:inline']) !!}
-                                                        {!! Form::button('<i class="fas fa-ban mx-1"></i>Cancel', ['type' => 'submit', 'class' => 'btn btn-danger', $cancellable[$appointment->id]? 'disabled' : '']) !!}
+                                                        {!! Form::button('<i class="fas fa-ban mx-1"></i>Cancel', ['type' => 'submit', 'class' => 'btn btn-danger', $cancellable[$appointment->id] ? 'disabled' : '']) !!}
                                                         {!! Form::close() !!}
                                                     </td>
                                                 </tr>
