@@ -19,7 +19,7 @@ class StoryFactory extends Factory
     {
         return [
             'doctor_id' => Doctor::all()->pluck('id')->random(1)->first(),
-            'date' => $this->faker->date(),
+            'date' => $this->faker->dateTimeBetween('-3 months'),
             'description' => $this->faker->text()
         ];
     }

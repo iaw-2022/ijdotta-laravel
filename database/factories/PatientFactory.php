@@ -16,13 +16,15 @@ class PatientFactory extends Factory
      */
     public function definition()
     {
+        $companies = ['IOMA', 'SOSUNS', 'OSDE', 'Swiss Medical', 'Federada', 'DOSEM'];
+
         return [
             'id' => $this->faker->numberBetween(10000, 99999),
             'name' => $this->faker->name(),
             'lastname' => $this->faker->lastName(),
             'email' => $this->faker->unique()->safeEmail(),
             'password' => bcrypt('12345678'),
-            'health_insurance_company' => $this->faker->company,
+            'health_insurance_company' => $companies[array_rand($companies)], //$this->faker->company,
             'health_insurance_id' => $this->faker->creditCardNumber()
         ];
     }
