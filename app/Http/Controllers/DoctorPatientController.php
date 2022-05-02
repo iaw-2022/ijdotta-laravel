@@ -26,7 +26,7 @@ class DoctorPatientController extends Controller
      */
     public function create()
     {
-        //
+        return view('patients.doctor-create');
     }
 
     /**
@@ -70,7 +70,8 @@ class DoctorPatientController extends Controller
      */
     public function edit(Patient $patient)
     {
-        //
+        return view('patients.doctor-edit')
+                ->with('patient', $patient);
     }
 
     /**
