@@ -30,12 +30,12 @@
                                 </div>
 
                                 <div class="form-group">
-                                    {{ Form::label('health insurance company') }}
+                                    {{ Form::label('health_insurance_company') }}
                                     {{ Form::text('health_insurance_company', null, ['class' => 'form-control']) }}
                                 </div>
 
                                 <div class="form-group">
-                                    {{ Form::label('health insurance id') }}
+                                    {{ Form::label('health_insurance_id') }}
                                     {{ Form::text('health_insurance_id', null, ['class' => 'form-control']) }}
                                 </div>
 
