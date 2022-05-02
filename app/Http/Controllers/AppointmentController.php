@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Appointment;
+use App\Models\Doctor;
+use App\Models\Patient;
 use Illuminate\Http\Request;
 
 class AppointmentController extends Controller
@@ -31,7 +33,9 @@ class AppointmentController extends Controller
      */
     public function create()
     {
-        //
+        $doctors = DoctorController::mapDoctorIdToDoctorName(Doctor::all());
+        $patients = PatientController::mapPatientIdToPatientName(Patient::all());
+        return view('appointments.create', compact('doctors', 'patients'));
     }
 
     /**
@@ -64,7 +68,9 @@ class AppointmentController extends Controller
      */
     public function edit(Appointment $appointment)
     {
-        //
+        $doctors = DoctorController::mapDoctorIdToDoctorName(Doctor::all());
+        $patients = PatientController::mapPatientIdToPatientName(Patient::all());
+        return view('appointments.edit', compact('appointment', 'doctors', 'patients'));
     }
 
     /**

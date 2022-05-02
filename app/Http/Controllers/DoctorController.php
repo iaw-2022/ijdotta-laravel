@@ -83,4 +83,12 @@ class DoctorController extends Controller
     {
         //
     }
+
+    public static function mapDoctorIdToDoctorName($doctors) {
+        $doctorsMap = [];
+        foreach ($doctors as $doctor) {
+            $doctorsMap[$doctor->id] = $doctor->lastname.', '.$doctor->name;
+        }
+        return $doctorsMap;
+    }
 }

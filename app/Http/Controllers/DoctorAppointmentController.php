@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Appointment;
+use App\Models\Patient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
@@ -29,7 +30,10 @@ class DoctorAppointmentController extends Controller
      */
     public function create()
     {
-        //
+        $patients = PatientController::mapPatientIdToPatientName(Patient::all());
+        $doctor = Auth::user()->doctor()->get()->first();
+        $doctors = DoctorController::mapDoctorIdToDoctorName([$doctor]);
+        return view('appointments.doctor-create', compact('patients', 'doctors'));
     }
 
     /**
@@ -62,7 +66,10 @@ class DoctorAppointmentController extends Controller
      */
     public function edit(Appointment $appointment)
     {
-        //
+        $patients = PatientController::mapPatientIdToPatientName(Patient::all());
+        $doctor = Auth::user()->doctor()->get()->first();
+        $doctors = DoctorController::mapDoctorIdToDoctorName([$doctor]);
+        return view('appointments.doctor-edit', compact('appointment', 'patients', 'doctors'));
     }
 
     /**

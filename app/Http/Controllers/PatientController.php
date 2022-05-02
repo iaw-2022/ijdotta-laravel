@@ -91,4 +91,12 @@ class PatientController extends Controller
     {
         //
     }
+
+    public static function mapPatientIdToPatientName($patients) {
+        $patientsMap = [];
+        foreach ($patients as $patient) {
+            $patientsMap[$patient->id] = $patient->lastname.', '.$patient->name;
+        }
+        return $patientsMap;
+    }
 }
