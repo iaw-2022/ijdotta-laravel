@@ -12,7 +12,7 @@
                         <div class="card">
                             <div class="card-body">
 
-                                {{ Form::open(['route' => ['admin.appointments.create']]) }}
+                                {{ Form::open(['route' => ['admin.appointments.store']]) }}
 
                                 <div class="form-group">
                                     {{ Form::label('date') }}
