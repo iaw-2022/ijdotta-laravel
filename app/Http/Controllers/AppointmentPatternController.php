@@ -28,7 +28,7 @@ class AppointmentPatternController extends Controller
      */
     public function create(Doctor $doctor)
     {
-        //
+        return view('appointments-patterns.create', compact('doctor'));
     }
 
     /**
@@ -47,24 +47,24 @@ class AppointmentPatternController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Doctor  $doctor
-     * @param  \App\Models\AppointmentPattern  $appointmentPattern
+     * @param  \App\Models\AppointmentPattern  $appointmentspattern
      * @return \Illuminate\Http\Response
      */
-    public function show(Doctor $doctor, AppointmentPattern $appointmentPattern)
+    public function show(Doctor $doctor, AppointmentPattern $appointmentspattern)
     {
-        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Doctor  $doctor
-     * @param  \App\Models\AppointmentPattern  $appointmentPattern
+     * @param  \App\Models\AppointmentPattern  $appointmentspattern
      * @return \Illuminate\Http\Response
      */
-    public function edit(Doctor $doctor, AppointmentPattern $appointmentPattern)
+    public function edit(Doctor $doctor, AppointmentPattern $appointmentspattern)
     {
-        //
+        return view('appointments-patterns.edit', compact('doctor'))
+                ->with('appointmentspattern', $appointmentspattern);
     }
 
     /**
@@ -72,10 +72,10 @@ class AppointmentPatternController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Doctor  $doctor
-     * @param  \App\Models\AppointmentPattern  $appointmentPattern
+     * @param  \App\Models\AppointmentPattern  $appointmentspattern
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Doctor $doctor, AppointmentPattern $appointmentPattern)
+    public function update(Request $request, Doctor $doctor, AppointmentPattern $appointmentspattern)
     {
         //
     }
@@ -84,10 +84,10 @@ class AppointmentPatternController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Doctor  $doctor
-     * @param  \App\Models\AppointmentPattern  $appointmentPattern
+     * @param  \App\Models\AppointmentPattern  $appointmentspattern
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Doctor $doctor, AppointmentPattern $appointmentPattern)
+    public function destroy(Doctor $doctor, AppointmentPattern $appointmentspattern)
     {
         //
     }
