@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Role;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -18,24 +19,25 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+        $role_id = Role::where('role', 'admin')->get()->first()->id;
 
         User::create([
             'name' => 'admin',
-            'role' => 'admin',
+            'role_id' => $role_id,
             'email' => 'admin@clinicapp.com',
             'password' => bcrypt("clinic#app@2022")
         ]);
         
         User::create([
             'name' => 'sysowner',
-            'role' => 'admin',
+            'role_id' => $role_id,
             'email' => 'ij.dotta@gmail.com',
             'password' => bcrypt("salvameSuperman!")
         ]);
         
         User::create([
             'name' => 'dummy',
-            'role' => 'admin',
+            'role_id' => $role_id,
             'email' => 'dummy@dummy.com',
             'password' => bcrypt("12345678")
         ]);

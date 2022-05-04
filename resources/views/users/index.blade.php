@@ -31,7 +31,7 @@
                                     @foreach ($users as $user)
                                         <tr>
                                             <th scope="row">{{ $user->id }}</th>
-                                            <td>{{ $user->role }}</td>
+                                            <td>{{ $user->role->role }}</td>
                                             <td>{{ $user->name }}</td>
                                             @php
                                                 $rel_doctor = $user->doctor()->get()->first();

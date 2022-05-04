@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Role;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\User;
 
@@ -17,9 +18,11 @@ class DoctorFactory extends Factory
      */
     public function definition()
     {
+        $role_id = Role::where('role', 'doctor')->get()->first()->id;
+
         return [
             'id' => $this->faker->numberBetween(10000, 99999),
-            'user_id' => User::factory()->createOne(['role' => 'doctor', 'password' => bcrypt('12345678')])->id,
+            'user_id' => User::factory()->createOne(['role_id' => $role_id, 'password' => bcrypt('12345678')])->id,
             'name' => $this->faker->name(),
             'lastname' => $this->faker->lastName(),
         ];

@@ -4,7 +4,7 @@
     </a>
     
     {{-- Admin links --}}
-    @if (Auth::user()->role == 'admin')
+    @if (Auth::user()->role->role == 'admin')
     {{-- <a class="nav-link btn" href="#">
         <span>Admin links</span>
     </a> --}}
