@@ -42,11 +42,55 @@
                                             {{ Form::time('end_time', null, ['class' => 'form-control']) }}
                                         </div>
                                     </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="col">
+                                        <div class="form-row">
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <div class="form-check">
+                                                        {{ Form::checkbox('days[0]', 'Mon') }}
+                                                        {{ Form::label('monday') }}
+                                                    </div>
+                                                    <div class="form-check">
+                                                        {{ Form::checkbox('days[1]', 'Tue') }}
+                                                        {{ Form::label('tuesday') }}
+                                                    </div>
+                                                    <div class="form-check">
+                                                        {{ Form::checkbox('days[2]', 'Wed') }}
+                                                        {{ Form::label('wednesday') }}
+                                                    </div>
+                                                    <div class="form-check">
+                                                        {{ Form::checkbox('days[3]', 'Thu') }}
+                                                        {{ Form::label('thursday') }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <div class="form-check">
+                                                        {{ Form::checkbox('days[4]', 'Fri') }}
+                                                        {{ Form::label('friday') }}
+                                                    </div>
+                                                    <div class="form-check">
+                                                        {{ Form::checkbox('days[5]', 'Sat') }}
+                                                        {{ Form::label('saturday') }}
+                                                    </div>
+                                                    <div class="form-check">
+                                                        {{ Form::checkbox('days[6]', 'Sun') }}
+                                                        {{ Form::label('sunday') }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="col">
                                         <div class="form-group">
                                             {{ Form::label('appointment_duration') }}
                                             {{ Form::text('appointment_duration', null, ['class' => 'form-control', 'aria-describedby' => 'durationHelp']) }}
-                                            <small id="durationHelp" class="form-text text-muted">Enter a number of minutes</small>
+                                            <small id="durationHelp" class="form-text text-muted">Enter a number of
+                                                minutes</small>
                                         </div>
                                     </div>
                                 </div>
