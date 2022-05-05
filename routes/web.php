@@ -7,6 +7,7 @@ use App\Http\Controllers\DoctorAppointmentPatternsController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\DoctorPatientController;
 use App\Http\Controllers\DoctorStoryController;
+use App\Http\Controllers\DoctorTreatmentController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\StoryController;
 use App\Http\Controllers\TreatmentController;
@@ -44,7 +45,7 @@ Route::name('')->group(function() {
         'appointmentspatterns' => DoctorAppointmentPatternsController::class,
         'patients' => DoctorPatientController::class,
         'patients.stories' => DoctorStoryController::class,
-        'patients.stories.treatments' => TreatmentController::class,
+        'patients.stories.treatments' => DoctorTreatmentController::class,
     ]);
 
 });
