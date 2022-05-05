@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -25,7 +26,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        $roles = $this->mapRoleIdToName(Role::all());
+        return view('users.create', compact('roles'));
     }
 
     /**
@@ -58,7 +60,8 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        $roles = $this->mapRoleIdToName(Role::all());
+        return view('users.edit', compact('user', 'roles'));
     }
 
     /**
@@ -82,5 +85,21 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         //
+    }
+
+    public static function mapUserIdToUserName($users) {
+        $usersMap = [];
+        foreach ($users as $user) {
+            $usersMap[$user->id] = $user->email;
+        }
+        return $usersMap;
+    }
+
+    private function mapRoleIdToName($roles) {
+        $rolesMap = [];
+        foreach ($roles as $role) {
+            $rolesMap[$role->id] = $role->role;
+        }
+        return $rolesMap;
     }
 }
