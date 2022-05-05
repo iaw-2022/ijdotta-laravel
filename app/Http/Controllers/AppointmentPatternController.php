@@ -5,9 +5,20 @@ namespace App\Http\Controllers;
 use App\Models\AppointmentPattern;
 use App\Models\Doctor;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Helpers\AppointmentPatternHelper;
+use App\Http\Controllers\Helpers\AppointmentPatternHelperImpl;
+use Exception;
 
 class AppointmentPatternController extends Controller
 {
+
+    public AppointmentPatternHelper $appointmentPatternHelper;
+
+    public function __construct()
+    {
+        $this->appointmentPatternHelper = new AppointmentPatternHelperImpl();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -40,7 +51,8 @@ class AppointmentPatternController extends Controller
      */
     public function store(Request $request, Doctor $doctor)
     {
-        //
+        $data = $request->input();
+        AppointmentPattern::create($data);
     }
 
     /**
@@ -52,6 +64,7 @@ class AppointmentPatternController extends Controller
      */
     public function show(Doctor $doctor, AppointmentPattern $appointmentspattern)
     {
+        //
     }
 
     /**
@@ -77,7 +90,20 @@ class AppointmentPatternController extends Controller
      */
     public function update(Request $request, Doctor $doctor, AppointmentPattern $appointmentspattern)
     {
-        //
+        $data = $request->input();
+        
+        $attributes = ['initial_date', 'end_date', 'initial_time', 'end_time', 'appointment_duration', 'days'];
+        foreach ($attributes as $attr) {
+            $appointmentspattern->$attr = $data[$attr];
+        }
+
+        try {
+            $this->appointmentPatternHelper->checkConflicts($appointmentspattern);
+            $appointmentspattern->save();
+        } catch (Exception $exception) {
+            clock($exception);
+        }
+        return redirect(route('admin.doctors.appointmentspatterns.index', [$doctor->id]));
     }
 
     /**
