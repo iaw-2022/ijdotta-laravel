@@ -24,25 +24,6 @@
                                     {{ Form::textarea('description', null, ['class' => 'form-control', 'rows' => '50']) }}
                                 </div>
 
-                                <div class="container">
-
-                                    @foreach ($treatments as $treatment)
-                                    {{ Form::model($treatment, ['method' => 'PUT', 'route' => ['patients.stories.treatments.update', [$doctor->id, $story->id, $treatment->id]]]) }}
-
-                                    <div class="form-group">
-                                        {{ Form::label('title') }}
-                                        {{ Form::text('title', null, ['class' => 'form-control']) }}
-                                    </div>
-
-                                    <div class="form-group">
-                                        {{ Form::label('description') }}
-                                        {{ Form::textarea('description', null, ['class' => 'form-control', 'rows' => '50']) }}
-                                    </div>
-
-                                    {{ Form::close() }}
-                                    @endforeach
-                                </div>
-
                                 <div class="form-row">
                                     <div class="col">
                                         <div class="form-group">

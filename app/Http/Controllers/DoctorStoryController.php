@@ -41,7 +41,6 @@ class DoctorStoryController extends Controller
      */
     public function store(Request $request, Patient $patient)
     {
-        //
     }
 
     /**
@@ -84,7 +83,7 @@ class DoctorStoryController extends Controller
      */
     public function update(Request $request, Patient $patient, Story $story)
     {
-        //
+        return redirect(route('patients.stories.show', [$patient->id, $story->id]));
     }
 
     /**

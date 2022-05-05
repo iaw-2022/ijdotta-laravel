@@ -37,9 +37,16 @@
                             </div>
 
                             <div class="row mx-3">
-                                <div class="col-12">
+                                <div class="col-9">
                                     <h1>Treatments</h1>
                                 </div>
+                                <div class="col-3 d-flex align-items-center">
+                                    <a class="btn btn-primary" href="{{ route('patients.stories.treatments.create', [$patient->id, $story->id]) }}">
+                                        <i class="fas fa-plus-circle mx-1"></i><span>Add treatment</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="row mx-3 d-flex justify-content-start">
                             </div>
                             @foreach ($treatments as $treatment)
                                 <div class="row m-3">
