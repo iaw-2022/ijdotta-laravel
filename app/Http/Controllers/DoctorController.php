@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Doctor;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class DoctorController extends Controller
@@ -25,7 +26,8 @@ class DoctorController extends Controller
      */
     public function create()
     {
-        //
+        $users = UserController::mapUserIdToUserName(User::all());
+        return view('doctors.create', compact('users'));
     }
 
     /**
@@ -58,7 +60,8 @@ class DoctorController extends Controller
      */
     public function edit(Doctor $doctor)
     {
-        //
+        $users = UserController::mapUserIdToUserName(User::all());
+        return view('doctors.edit', compact('doctor', 'users'));
     }
 
     /**
