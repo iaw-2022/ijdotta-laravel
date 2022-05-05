@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Patient;
 use App\Models\Story;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DoctorStoryController extends Controller
 {
@@ -27,7 +28,8 @@ class DoctorStoryController extends Controller
      */
     public function create(Patient $patient)
     {
-        //
+        $doctor = Auth::user()->doctor;
+        return view('stories.doctor-create', compact('doctor', 'patient'));
     }
 
     /**
@@ -67,7 +69,9 @@ class DoctorStoryController extends Controller
      */
     public function edit(Patient $patient, Story $story)
     {
-        //
+        $doctor = Auth::user()->doctor;
+        $treatments = $story->treatments;
+        return view('stories.doctor-edit', compact('doctor', 'patient', 'story', 'treatments'));
     }
 
     /**
