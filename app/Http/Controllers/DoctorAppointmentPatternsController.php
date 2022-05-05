@@ -27,7 +27,7 @@ class DoctorAppointmentPatternsController extends Controller
      */
     public function create()
     {
-        //
+        return view('appointments-patterns.doctor-create');
     }
 
     /**
