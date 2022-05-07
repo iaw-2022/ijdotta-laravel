@@ -14,12 +14,6 @@
                 <div class="col-lg-12">
                     <div class="card">
 
-                        <div class="card-body pb-0">
-                            <a class="btn btn-success my-3" href="{{ route('appointments.create') }}">
-                                <i class="fas fa-plus-circle mx-1"></i><span>Create</span>
-                            </a>
-                        </div>
-
                         <div class="card-body overflow-auto">
 
 
@@ -50,10 +44,6 @@
                                                 @endif
                                             </td>
                                             <td class="action-buttons-td">
-                                                <a
-                                                    class="btn btn-warning" href="{{ route('appointments.edit', $appointment->id) }}">
-                                                    <i class="fas fa-pen mx-1"></i><span>Edit</span>
-                                                </a>
                                                 {!! Form::open(['method' => 'delete', 'route' => ['appointments.destroy', $appointment->id], 'style' => 'display:inline']) !!}
                                                 {!! Form::button('<i class="fa fa-trash mx-1"></i>Delete', ['type' => 'submit', 'class' => 'btn btn-danger']) !!}
                                                 {!! Form::close() !!}
