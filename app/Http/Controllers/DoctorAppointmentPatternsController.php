@@ -42,17 +42,6 @@ class DoctorAppointmentPatternsController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\AppointmentPattern  $appointmentspattern
-     * @return \Illuminate\Http\Response
-     */
-    public function show(AppointmentPattern $appointmentspattern)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\AppointmentPattern  $appointmentspattern
