@@ -37,15 +37,15 @@ Route::get('/dashboard', function () {
 
 // Does not require auth currently.
 
-Route::name('')->group(function() {
+Route::name('')->middleware(['auth'])->group(function() {
     Route::resource('appointments', DoctorAppointmentController::class)->only('index', 'destroy');
-    Route::resource('appointmentspatterns', DoctorAppointmentPatternsController::class)->except('index', 'show');
+    Route::resource('appointmentspatterns', DoctorAppointmentPatternsController::class)->except('show');
     Route::resource('patients', DoctorPatientController::class);
     Route::resource('patients.stories', DoctorStoryController::class)->except('index');
     Route::resource('patients.stories.treatments', DoctorTreatmentController::class)->except('index', 'show');
 });
 
-Route::prefix('admin')->name('admin.')->group(function () {
+Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () {
     Route::resource('doctors', DoctorController::class)->except('show');
     Route::resource('doctors.appointmentspatterns', AppointmentPatternController::class)->except('show', 'edit', 'update');
     Route::resource('appointments', AppointmentController::class)->only('index', 'destroy');
