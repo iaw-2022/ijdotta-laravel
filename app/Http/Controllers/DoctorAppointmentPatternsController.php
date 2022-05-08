@@ -3,11 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\AppointmentPattern;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class DoctorAppointmentPatternsController extends Controller
 {
+    public AppointmentPatternHelper $appointmentPatternHelper;
+
+    public function __construct()
+    {
+        $this->appointmentPatternHelper = new AppointmentPatternHelperImpl();
+    }
     /**
      * Display a listing of the resource.
      *
@@ -38,7 +45,19 @@ class DoctorAppointmentPatternsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $this->validatePattern($request);
+        $doctor = ['doctor_id' => Auth::user()->doctor->id];
+        $data = array_merge($data, $doctor);
+
+        $pattern = AppointmentPattern::create($data);
+        try {
+            $this->appointmentPatternHelper->checkConflicts($pattern);
+            
+
+
+        } catch(Exception $exception) {
+
+        }
     }
 
     /**
@@ -73,5 +92,16 @@ class DoctorAppointmentPatternsController extends Controller
     public function destroy(AppointmentPattern $appointmentspattern)
     {
         //
+    }
+
+    private function validatePattern(Request $request) {
+        return $request->validate([
+            'initial_date' => ['required', 'date'],
+            'end_date' => ['required', 'date', 'after:initial_date'],
+            'initial_time' => ['required', 'date_format:H:i'],
+            'end_time' => ['required', 'date_format:H:i', 'after:initial_time'],
+            'appointment_duration' => ['required', 'digits_between:1,2'],
+            'days' => ['required', 'array'],
+        ]);
     }
 }

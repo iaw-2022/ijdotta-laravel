@@ -51,7 +51,15 @@ class AppointmentPatternController extends Controller
      */
     public function store(Request $request, Doctor $doctor)
     {
-        $data = $request->input();
+        $data = $request->validate([
+            'initial_date' => ['required', 'date'],
+            'end_date' => ['required', 'date', 'after:initial_date'],
+            'initial_time' => ['required', 'date_format:H:i'],
+            'end_time' => ['required', 'date_format:H:i', 'after:initial_time'],
+            'appointment_duration' => ['required', 'digits_between:1,2'],
+            'days' => ['required', 'array'],
+        ]);
+
         AppointmentPattern::create($data);
     }
 
@@ -103,6 +111,6 @@ class AppointmentPatternController extends Controller
      */
     public function destroy(Doctor $doctor, AppointmentPattern $appointmentspattern)
     {
-        //
+        $appointmentspattern->delete();
     }
 }
