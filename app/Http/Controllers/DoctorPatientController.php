@@ -39,7 +39,7 @@ class DoctorPatientController extends Controller
     {
         Patient::create(PatientController::validatePatient($request));
         session()->flash('success', 'Patient succesfully created.');
-        return redirect(route('admin.patients.index'));
+        return redirect(route('patients.index'));
     }
 
     /**
@@ -87,7 +87,7 @@ class DoctorPatientController extends Controller
     {
         $patient->update(PatientController::validatePatient($request, $patient));
         session()->flash('success', 'Patient succesfully updated.');
-        return redirect(route('admin.patients.index'));
+        return redirect(route('patients.index'));
     }
 
     /**
@@ -100,6 +100,6 @@ class DoctorPatientController extends Controller
     {
         $patient->delete();
         session()->flash('success', 'Patient succesfully deleted.');
-        return redirect(route('admin.patients.index'));
+        return redirect(route('patients.index'));
     }
 }
