@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\AppointmentPattern;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Doctor;
 use Carbon\Carbon;
@@ -27,7 +28,8 @@ class AppointmentFactory extends Factory
             'date' => $date->toDateString(),//$this->faker->date(),
             'initial_time' => $date->toTimeString(),
             'end_time' => $date->addMinutes(20)->toTimeString(),
-            'doctor_id' => Doctor::all()->pluck('id')->random(1)->first()
+            'doctor_id' => Doctor::all()->pluck('id')->random(1)->first(),
+            'appointment_pattern_id' => AppointmentPattern::all()->pluck('id')->random(1)->first(),
         ];
     }
 }

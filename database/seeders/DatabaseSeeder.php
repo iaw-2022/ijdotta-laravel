@@ -22,8 +22,8 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Doctor::factory()->count(2)
-            ->has(Appointment::factory()->count(3))
             ->has(AppointmentPattern::factory()->count(2))
+            ->has(Appointment::factory()->count(3))
             ->create();
 
         $this->call([
