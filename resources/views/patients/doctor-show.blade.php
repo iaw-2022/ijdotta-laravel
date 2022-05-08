@@ -163,10 +163,6 @@
                                                             <i class="fas fa-comment-alt mx-1"></i></i></i><span>Write
                                                                 story</span>
                                                         </a>
-                                                        <a class="btn btn-warning"
-                                                            href="{{ route('appointments.edit', $appointment->id) }}">
-                                                            <i class="fas fa-pen mx-1"></i><span>Edit</span>
-                                                        </a>
                                                         {!! Form::open(['method' => 'delete', 'route' => ['appointments.destroy', $appointment->id], 'style' => 'display:inline']) !!}
                                                         {!! Form::button('<i class="fas fa-ban mx-1"></i>Cancel', ['type' => 'submit', 'class' => 'btn btn-danger', $cancellable[$appointment->id] ? 'disabled' : '']) !!}
                                                         {!! Form::close() !!}
