@@ -11,6 +11,7 @@
                     <div class="container">
                         <div class="card">
                             <div class="card-body">
+                                <x-errors-alert/>
 
                                 {{ Form::model($treatment, ['method' => 'PUT', 'route' => ['patients.stories.treatments.update', [$patient->id, $story->id, $treatment->id]]]) }}
 

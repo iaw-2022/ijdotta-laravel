@@ -11,6 +11,7 @@
                     <div class="container">
                         <div class="card">
                             <div class="card-body">
+                                <x-errors-alert/>
 
                                 {{ Form::open(['route' => ['patients.stories.treatments.store', [$patient->id, $story->id]]]) }}
 

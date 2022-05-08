@@ -10,17 +10,6 @@ use Illuminate\Http\Request;
 class DoctorTreatmentController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @param  \App\Models\Story  $story
-     * @return \Illuminate\Http\Response
-     */
-    public function index(Story $story)
-    {
-        //
-    }
-
-    /**
      * Show the form for creating a new resource.
      *
      * @param  \App\Models\Story  $story
@@ -38,9 +27,11 @@ class DoctorTreatmentController extends Controller
      * @param  \App\Models\Story  $story
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Story $story)
+    public function store(Request $request, Patient $patient, Story $story)
     {
-        //
+        Treatment::create($this->validateTreatment($request, $story));
+        session()->flash('success', 'Treatment successfully created.');
+        return redirect(route('patients.stories.show', [$patient->id, $story->id]));
     }
 
     /**
@@ -75,7 +66,7 @@ class DoctorTreatmentController extends Controller
      * @param  \App\Models\Treatment  $treatment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Story $story, Treatment $treatment)
+    public function update(Request $request, Patient $patient, Story $story, Treatment $treatment)
     {
         //
     }
@@ -87,8 +78,21 @@ class DoctorTreatmentController extends Controller
      * @param  \App\Models\Treatment  $treatment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Story $story, Treatment $treatment)
+    public function destroy(Patient $patient, Story $story, Treatment $treatment)
     {
-        //
+        $treatment->delete();
+        session()->flash('success', 'Treatment successfully deleted.');
+        return redirect(route('patients.stories.show', [$patient->id, $story->id]));
+    }
+
+    public function validateTreatment(Request $request, Story $story) {
+        $attributes = $request->validate([
+            'description' => ['required'],
+        ]);
+
+        return array_merge($attributes, [
+            'title' => 'No title',
+            'story_id' => $story->id,
+        ]);
     }
 }
