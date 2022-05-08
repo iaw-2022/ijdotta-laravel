@@ -44,6 +44,9 @@ class DoctorController extends Controller
         $data = $this->validateDoctor($request);
         $newDoctor = Doctor::create($data);
         clock($newDoctor);
+
+        session()->flash('success', 'Doctor succesfully created.');
+
         return redirect(route('admin.doctors.index'));
     }
 
@@ -80,6 +83,9 @@ class DoctorController extends Controller
     public function update(Request $request, Doctor $doctor)
     {
         $doctor->update($this->validateDoctor($request));
+
+        session()->flash('success', 'Doctor succesfully updated.');
+
         return redirect(route('admin.doctors.index'));
     }
 
@@ -92,6 +98,7 @@ class DoctorController extends Controller
     public function destroy(Doctor $doctor)
     {
         $doctor->delete();
+        session()->flash('success', 'Doctor succesfully deleted.');
         return redirect(route('admin.doctors.index'));
     }
 
