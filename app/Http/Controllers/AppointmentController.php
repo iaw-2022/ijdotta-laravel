@@ -33,6 +33,8 @@ class AppointmentController extends Controller
     public function destroy(Appointment $appointment)
     {
         $appointment->delete();
+        session()->flash('success', 'Appointment successfully deleted.');
+        return redirect(route('admin.appointments.index'));
     }
 
 }

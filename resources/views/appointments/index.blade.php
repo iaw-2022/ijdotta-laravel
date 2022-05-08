@@ -15,7 +15,7 @@
                     <div class="card">
 
                         <div class="card-body overflow-auto">
-
+                            <x-success-message/>
 
                             <table id="appointments" class="table table-hover">
                                 <thead>
@@ -47,7 +47,7 @@
                                             <td>
                                                 @if ($doctor)
                                                     <a class="btn"
-                                                        href="{{ route('admin.doctors.show', $doctor->id) }}">
+                                                        href="{{ route('admin.doctors.index', ['id' => $doctor->id]) }}">
                                                         <i class="fas fa-user-md mx-3"></i><span>{{ $doctor->lastname }},
                                                             {{ $doctor->name }}</span>
                                                     </a>

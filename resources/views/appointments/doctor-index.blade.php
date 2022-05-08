@@ -15,7 +15,7 @@
                     <div class="card">
 
                         <div class="card-body overflow-auto">
-
+                            <x-success-message/>
 
                             <table id="appointments" class="table table-hover">
                                 <thead>
