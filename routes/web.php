@@ -38,28 +38,21 @@ Route::get('/dashboard', function () {
 // Does not require auth currently.
 
 Route::name('')->group(function() {
-    Route::resources([
-        // 'doctors' => DoctorController::class,
-        // 'doctors.appointmentspatterns' => AppointmentPatternController::class,
-        'appointments' => DoctorAppointmentController::class,
-        'appointmentspatterns' => DoctorAppointmentPatternsController::class,
-        'patients' => DoctorPatientController::class,
-        'patients.stories' => DoctorStoryController::class,
-        'patients.stories.treatments' => DoctorTreatmentController::class,
-    ]);
-
+    Route::resource('appointments', DoctorAppointmentController::class)->only('index', 'destroy');
+    Route::resource('appointmentspatterns', DoctorAppointmentPatternsController::class)->except('index', 'show');
+    Route::resource('patients', DoctorPatientController::class);
+    Route::resource('patients.stories', DoctorStoryController::class)->except('index');
+    Route::resource('patients.stories.treatments', DoctorTreatmentController::class)->except('index', 'show');
 });
 
 Route::prefix('admin')->name('admin.')->group(function () {
-    Route::resources([
-        'doctors' => DoctorController::class,
-        'doctors.appointmentspatterns' => AppointmentPatternController::class,
-        'appointments' => AppointmentController::class,
-        'patients' => PatientController::class,
-        'patients.stories' => StoryController::class,
-        'patients.stories.treatments' => TreatmentController::class,
-        'users' => UserController::class
-    ]);
+    Route::resource('doctors', DoctorController::class)->except('show');
+    Route::resource('doctors.appointmentspatterns', AppointmentPatternController::class)->except('show', 'edit', 'update');
+    Route::resource('appointments', AppointmentController::class)->only('index', 'destroy');
+    Route::resource('patients', PatientController::class);
+    Route::resource('patients.stories', StoryController::class)->only('destroy');
+    Route::resource('patients.stories.treatments', TreatmentController::class)->only('destroy');
+    Route::resource('users', UserController::class);
 });
 
 
