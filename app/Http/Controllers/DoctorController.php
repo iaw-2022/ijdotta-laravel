@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Doctor;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use PhpParser\Comment\Doc;
 
 class DoctorController extends Controller
 {
@@ -38,7 +40,11 @@ class DoctorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        clock($request);
+        $data = $this->validateDoctor($request);
+        $newDoctor = Doctor::create($data);
+        clock($newDoctor);
+        return redirect(route('admin.doctors.index'));
     }
 
     /**
@@ -73,7 +79,8 @@ class DoctorController extends Controller
      */
     public function update(Request $request, Doctor $doctor)
     {
-        //
+        $doctor->update($this->validateDoctor($request));
+        return redirect(route('admin.doctors.index'));
     }
 
     /**
@@ -84,14 +91,28 @@ class DoctorController extends Controller
      */
     public function destroy(Doctor $doctor)
     {
-        //
+        $doctor->delete();
+        return redirect(route('admin.doctors.index'));
     }
 
-    public static function mapDoctorIdToDoctorName($doctors) {
+    public static function mapDoctorIdToDoctorName($doctors)
+    {
         $doctorsMap = [];
         foreach ($doctors as $doctor) {
-            $doctorsMap[$doctor->id] = $doctor->lastname.', '.$doctor->name;
+            $doctorsMap[$doctor->id] = $doctor->lastname . ', ' . $doctor->name;
         }
         return $doctorsMap;
+    }
+
+    private function validateDoctor(Request $request)
+    {
+        return $request->validate([
+            'user_id' => [
+                'required',
+                Rule::in(User::all()->pluck('id')->toArray())
+            ],
+            'name' => ['required', 'max:20'],
+            'lastname' => ['required', 'max:20'],
+        ]);
     }
 }

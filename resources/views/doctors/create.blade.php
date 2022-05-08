@@ -10,7 +10,10 @@
                 <div class="col-lg-12">
                     <div class="container">
                         <div class="card">
+                            
                             <div class="card-body">
+                                <x-errors-alert />
+                                
 
                                 {{ Form::open(['route' => ['admin.doctors.store']]) }}
 
@@ -25,23 +28,19 @@
                                 </div>
 
                                 <div class="form-group">
-                                    {{ Form::label('email') }}
-                                    {{ Form::text('email', null, ['class' => 'form-control']) }}
+                                    {{ Form::label('user_id') }}
+                                    {{ Form::select('user_id', $users, null, ['class' => 'form-control']) }}
                                 </div>
 
                                 <div class="form-group">
-                                    {{ Form::label('user') }}
-                                    {{ Form::select('user', $users, null, ['class' => 'form-control']) }}
-                                </div>
-
-                                <div class="form-group">
-                                    {{ Form::button('<i class="fas fa-check-circle mx-1"></i><span>Create doctor</span>', ['type' => 'submit','class' => 'btn btn-primary']) }}
+                                    {{ Form::button('<i class="fas fa-check-circle mx-1"></i><span>Create doctor</span>', ['type' => 'submit', 'class' => 'btn btn-primary']) }}
                                     <a class="btn btn-danger" href="{{ redirect()->back()->getTargetUrl() }}">
                                         <i class="fas fa-ban mx-1"></i><span>Cancel</span>
                                     </a>
                                 </div>
 
                                 {{ Form::close() }}
+
                             </div>
                         </div>
                     </div>
