@@ -40,10 +40,6 @@
                                             <td>{{ $doctor->email }}</td>
                                             <td class="action-buttons-td">
                                                 <a
-                                                    class="btn btn-primary" href="{{ route('admin.doctors.show', $doctor->id) }}">
-                                                    <i class="fas fa-eye mx-1"></i><span>Show</span>
-                                                </a>
-                                                <a
                                                     class="btn btn-warning" href="{{ route('admin.doctors.edit', $doctor->id) }}">
                                                     <i class="fas fa-pen mx-1"></i><span>Edit</span>
                                                 </a>
