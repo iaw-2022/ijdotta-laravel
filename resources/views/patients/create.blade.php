@@ -12,6 +12,8 @@
                         <div class="card">
                             <div class="card-body">
 
+                                <x-errors-alert/>
+
                                 {{ Form::open(['route' => ['admin.patients.store']]) }}
 
                                 <div class="form-group">

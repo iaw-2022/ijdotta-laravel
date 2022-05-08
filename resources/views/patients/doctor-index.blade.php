@@ -21,7 +21,7 @@
                         </div>
 
                         <div class="card-body overflow-auto">
-
+                            <x-success-message/>
 
                             <table id="patients" class="table table-hover">
                                 <thead>
