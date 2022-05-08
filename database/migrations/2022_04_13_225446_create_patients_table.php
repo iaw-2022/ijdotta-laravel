@@ -14,10 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('patients', function (Blueprint $table) {
-            $table->id(); // DNI
+            $table->id();
             $table->string('name');
             $table->string('lastname');
-            $table->string('email');
+            $table->string('email')->unique();
             $table->string('password')->default(12345678);
             $table->string('health_insurance_company')->nullable();
             $table->string('health_insurance_id')->nullable();
