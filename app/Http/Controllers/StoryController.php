@@ -17,6 +17,8 @@ class StoryController extends Controller
      */
     public function destroy(Patient $patient, Story $story)
     {
-        //
+        $story->delete();
+        session()->flash('success', 'Story successfully deleted.');
+        return redirect(route('admin.patients.show', [$patient->id]));
     }
 }

@@ -12,6 +12,8 @@
                         <div class="card">
                             <div class="card-body">
 
+                                <x-errors-alert/>
+
                                 {{ Form::open(['route' => ['patients.stories.store', [$patient->id]]]) }}
 
                                 <div class="form-group">
