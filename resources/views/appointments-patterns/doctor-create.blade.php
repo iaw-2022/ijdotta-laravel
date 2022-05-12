@@ -12,6 +12,8 @@
                         <div class="card">
                             <div class="card-body">
 
+                                <x-errors-alert/>
+
                                 {{ Form::open(['route' => ['appointmentspatterns.store']]) }}
                                 <div class="form-row">
                                     <div class="col">

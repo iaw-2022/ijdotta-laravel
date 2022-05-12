@@ -6,6 +6,9 @@ use App\Models\AppointmentPattern;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Helpers\AppointmentPatternHelper;
+use App\Http\Controllers\Helpers\AppointmentPatternHelperImpl;
+use Carbon\Carbon;
 
 class DoctorAppointmentPatternsController extends Controller
 {
@@ -45,19 +48,15 @@ class DoctorAppointmentPatternsController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $this->validatePattern($request);
-        $doctor = ['doctor_id' => Auth::user()->doctor->id];
-        $data = array_merge($data, $doctor);
-
-        $pattern = AppointmentPattern::create($data);
-        try {
-            $this->appointmentPatternHelper->checkConflicts($pattern);
-            
-
-
-        } catch(Exception $exception) {
-
+        $pattern = AppointmentPattern::create($this->validatePattern($request));
+        $conflicts = $this->appointmentPatternHelper->checkConflicts($pattern);
+        if (sizeof($conflicts) > 0) {
+            $pattern->delete();
+            $mappedErrors = $this->appointmentPatternHelper->mapPatternsToErrorsString($conflicts);
+            return redirect()->back()->withErrors($mappedErrors);
         }
+        session()->flash('success', 'Pattern successfully created.');
+        return redirect(route('appointmentspatterns.index'));
     }
 
     /**
@@ -91,11 +90,13 @@ class DoctorAppointmentPatternsController extends Controller
      */
     public function destroy(AppointmentPattern $appointmentspattern)
     {
-        //
+        $appointmentspattern->delete();
+        session()->flash('success', 'Pattern succesfully deleted.');
+        return redirect(route('appointmentspatterns.index'));
     }
 
     private function validatePattern(Request $request) {
-        return $request->validate([
+        $data = $request->validate([
             'initial_date' => ['required', 'date'],
             'end_date' => ['required', 'date', 'after:initial_date'],
             'initial_time' => ['required', 'date_format:H:i'],
@@ -103,5 +104,9 @@ class DoctorAppointmentPatternsController extends Controller
             'appointment_duration' => ['required', 'digits_between:1,2'],
             'days' => ['required', 'array'],
         ]);
+
+        $doctor = ['doctor_id' => Auth::user()->doctor->id];
+        return array_merge($data, $doctor);
     }
+
 }

@@ -9,16 +9,17 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="card">
-
                         
                         <div class="card-body pb-0">
+                            <x-success-message/>
                             <a class="btn btn-success my-3" href="{{ route('appointmentspatterns.create') }}">
                                 <i class="fas fa-plus-circle mx-1"></i><span>Create</span>
                             </a>
                         </div>
-
+                        
                         <div class="card-body overflow-auto">
-
+                            
+                            
                             <table class="table table-hover">
                                 <thead>
                                     <th scope="col">Id</th>
