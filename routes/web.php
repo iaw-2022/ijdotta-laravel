@@ -37,7 +37,7 @@ Route::get('/dashboard', function () {
 
 // Does not require auth currently.
 
-Route::name('')->middleware(['auth'])->group(function() {
+Route::name('')->middleware(['auth'])->group(function () {
     Route::resource('appointments', DoctorAppointmentController::class)->only('index', 'destroy');
     Route::resource('appointmentspatterns', DoctorAppointmentPatternsController::class)->except('show', 'edit', 'update');
     Route::resource('patients', DoctorPatientController::class);
@@ -53,6 +53,11 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
     Route::resource('patients.stories', StoryController::class)->only('destroy');
     Route::resource('users', UserController::class);
 });
+
+Route::middleware(['auth'])->name('user.password.edit')
+    ->get('/user/password/edit', [UserController::class, 'editPassword']);
+Route::middleware(['auth'])->name('user.password')
+    ->put('/user/password', [UserController::class, 'changePassword']);
 
 
 Route::get('/main', function () {

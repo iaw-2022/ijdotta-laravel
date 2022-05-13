@@ -28,7 +28,7 @@ class SimpsonsSeeder extends Seeder
         $user = User::create([
             'name' => 'Julius',
             'email' => 'dr.julius.hibbert@gmail.com',
-            'password' => bcrypt('12345678'),
+            'password' => '12345678',
             'role_id' => $role_id,
         ]);
 

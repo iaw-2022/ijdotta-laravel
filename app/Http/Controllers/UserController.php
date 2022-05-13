@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Password;
 
 class UserController extends Controller
 {
@@ -94,6 +96,23 @@ class UserController extends Controller
         return redirect(route('admin.users.index'));
     }
 
+    public function editPassword() {
+        return view('profile.custom-change-password');
+    }
+
+    public function changePassword(Request $request) {
+        $data = $request->validate([
+            'current_password' => ['required', 'current_password'],
+            'new_password' => ['required', Password::min(8)->mixedCase()->numbers()->uncompromised(),
+            'repeat_password' => ['required', 'same:new_password']],
+        ]);
+
+        $user = Auth::user();
+        $user->update(['password' => $data['new_password']]);
+        session()->flash('success', 'Password successfully updated.');
+        return redirect(route('dashboard'));
+    }
+
     public static function mapUserIdToUserName($users)
     {
         $usersMap = [];
@@ -114,7 +133,6 @@ class UserController extends Controller
 
     private function validateUser(Request $request, ?User $user = null)
     {
-
         $user ??= new User();
 
         return $request->validate([
