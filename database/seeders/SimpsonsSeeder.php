@@ -114,7 +114,7 @@ class SimpsonsSeeder extends Seeder
 
             $treatment = Treatment::create([
                 'story_id' => $story->id,
-                'title' => 'SOME TITLE',
+                'title' => 'Paracetamol',
                 'description' => 'Reposo por 1 mes.'
             ]);
 
