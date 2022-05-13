@@ -9,6 +9,8 @@ class Appointment extends Model
 {
     use HasFactory;
 
+    public $guarded = [];
+
     public function doctor()
     {
         return $this->belongsTo(Doctor::class);

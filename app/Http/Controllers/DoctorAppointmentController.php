@@ -17,7 +17,7 @@ class DoctorAppointmentController extends Controller
     public function index()
     {
         $doctor = Auth::user()->doctor()->get()->first();
-        $appointments = $doctor->appointments()->paginate(10);
+        $appointments = $doctor->appointments()->get()->all();
         return view('appointments.doctor-index')->with('appointments', $appointments);
     }
 
