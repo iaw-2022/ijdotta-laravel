@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
@@ -38,7 +39,9 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        User::create($this->validateUser($request));
+        session()->flash('success', 'User successfully created.');
+        return redirect(route('admin.users.index'));
     }
 
     /**
@@ -73,7 +76,9 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $user->update($this->validateUser($request, $user));
+        session()->flash('success', 'User successfully updated.');
+        return redirect(route('admin.users.index'));
     }
 
     /**
@@ -84,10 +89,13 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+        session()->flash('success', 'User successfully deleted.');
+        return redirect(route('admin.users.index'));
     }
 
-    public static function mapUserIdToUserName($users) {
+    public static function mapUserIdToUserName($users)
+    {
         $usersMap = [];
         foreach ($users as $user) {
             $usersMap[$user->id] = $user->email;
@@ -95,11 +103,24 @@ class UserController extends Controller
         return $usersMap;
     }
 
-    private function mapRoleIdToName($roles) {
+    private function mapRoleIdToName($roles)
+    {
         $rolesMap = [];
         foreach ($roles as $role) {
             $rolesMap[$role->id] = $role->role;
         }
         return $rolesMap;
+    }
+
+    private function validateUser(Request $request, ?User $user = null)
+    {
+
+        $user ??= new User();
+
+        return $request->validate([
+            'name' => ['required', 'max:30'],
+            'email' => ['required', 'email', Rule::unique('users', 'email')->ignore($user)],
+            'role_id' => ['required', Rule::in(Role::all()->pluck('id')->toArray())]
+        ]);
     }
 }

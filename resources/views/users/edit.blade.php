@@ -12,6 +12,9 @@
                         <div class="card">
                             <div class="card-body">
 
+                                <x-success-message />
+                                <x-errors-alert />
+
                                 {{ Form::model($user, ['method' => 'PUT', 'route' => ['admin.users.update', $user->id]]) }}
 
                                 <div class="form-group">
@@ -25,12 +28,12 @@
                                 </div>
 
                                 <div class="form-group">
-                                    {{ Form::label('role') }}
-                                    {{ Form::select('role', $roles, null, ['class' => 'form-control']) }}
+                                    {{ Form::label('role_id', 'Role') }}
+                                    {{ Form::select('role_id', $roles, null, ['class' => 'form-control']) }}
                                 </div>
 
                                 <div class="form-group">
-                                    {{ Form::button('<i class="fas fa-check-circle mx-1"></i><span>Update user</span>', ['type' => 'submit','class' => 'btn btn-primary']) }}
+                                    {{ Form::button('<i class="fas fa-check-circle mx-1"></i><span>Update user</span>', ['type' => 'submit', 'class' => 'btn btn-primary']) }}
                                     <a class="btn btn-danger" href="{{ redirect()->back()->getTargetUrl() }}">
                                         <i class="fas fa-ban mx-1"></i><span>Cancel</span>
                                     </a>
