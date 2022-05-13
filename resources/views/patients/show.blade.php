@@ -11,6 +11,9 @@
                     <div class="card">
                         <div class="card-body">
 
+                            <x-success-message/>
+                            <x-errors-alert/>
+
                             <ul class="nav nav-pills mb-3 d-flex justify-content-start" id="pills-tab" role="tablist">
                                 <li class="nav-item mx-2" role="presentation">
                                     <a class="nav-link active" id="pills-profile-tab" data-toggle="pill"
@@ -105,7 +108,7 @@
                                                 <tr>
                                                     <td>{{ $story->date }}</td>
                                                     <td style="width:70%">
-                                                        <em>Hidden story with id {{$story->id}}</em>
+                                                        <em>Hidden story with id {{ $story->id }}</em>
                                                     </td>
                                                     <td>
                                                         {!! Form::open(['method' => 'delete', 'route' => ['admin.patients.stories.destroy', [$patient->id, $story->id]], 'style' => 'display:inline']) !!}
@@ -145,11 +148,8 @@
                                                     <td>{{ $appointment->end_time }}</td>
                                                     <td>
                                                         @if ($doctor)
-                                                            <a class="btn"
-                                                                href="{{ route('admin.doctors.show', $doctor->id) }}">
-                                                                <i class="fas fa-user-md mx-3"></i><span>{{ $doctor->lastname }},
-                                                                    {{ $doctor->name }}</span>
-                                                            </a>
+                                                            <i class="fas fa-user-md mx-3"></i><span>{{ $doctor->lastname }},
+                                                                {{ $doctor->name }}</span>
                                                         @else
                                                             Unknown doctor
                                                         @endif
