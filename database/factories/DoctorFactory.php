@@ -22,7 +22,7 @@ class DoctorFactory extends Factory
 
         return [
             'id' => $this->faker->numberBetween(10000, 99999),
-            'user_id' => User::factory()->createOne(['role_id' => $role_id, 'password' => bcrypt('12345678')])->id,
+            'user_id' => User::factory()->createOne(['role_id' => $role_id, 'password' => '12345678'])->id,
             'name' => $this->faker->name(),
             'lastname' => $this->faker->lastName(),
         ];
