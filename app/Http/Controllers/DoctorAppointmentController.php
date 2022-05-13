@@ -31,7 +31,7 @@ class DoctorAppointmentController extends Controller
     {
         $appointment->delete();
         session()->flash('success', 'Appointment successfully deleted.');
-        return redirect(route('appointments.index'));
+        return redirect()->back();
     }
 
     public static function isCancelable(Appointment $appointment) {

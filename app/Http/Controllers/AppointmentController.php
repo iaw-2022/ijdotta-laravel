@@ -34,7 +34,7 @@ class AppointmentController extends Controller
     {
         $appointment->delete();
         session()->flash('success', 'Appointment successfully deleted.');
-        return redirect(route('admin.appointments.index'));
+        return redirect()->back();
     }
 
 }
