@@ -66,7 +66,7 @@
                                             </tr>
                                             <tr>
                                                 <th scope="row">
-                                                    Health Isurance Company
+                                                    Health Insurance Company
                                                 </th>
                                                 <td>
                                                     <em>Hidden</em>
