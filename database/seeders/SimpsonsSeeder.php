@@ -85,7 +85,6 @@ class SimpsonsSeeder extends Seeder
             'name' => 'Homer',
             'lastname' => 'Simpson',
             'email' => 'chunkylover53@aol.com',
-            'password' => 12345678,
             'health_insurance_company' => 'Springfield Health',
             'health_insurance_id' => 345761247
         ]);
