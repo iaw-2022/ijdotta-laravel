@@ -47,11 +47,10 @@ Route::name('')->middleware(['auth'])->group(function() {
 
 Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () {
     Route::resource('doctors', DoctorController::class)->except('show');
-    Route::resource('doctors.appointmentspatterns', AppointmentPatternController::class)->except('show', 'edit', 'update');
+    Route::resource('doctors.appointmentspatterns', AppointmentPatternController::class)->only('index', 'destroy');
     Route::resource('appointments', AppointmentController::class)->only('index', 'destroy');
     Route::resource('patients', PatientController::class);
     Route::resource('patients.stories', StoryController::class)->only('destroy');
-    Route::resource('patients.stories.treatments', TreatmentController::class)->only('destroy');
     Route::resource('users', UserController::class);
 });
 
