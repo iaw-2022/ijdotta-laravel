@@ -42,10 +42,6 @@
                                             <td>{{ $pattern->appointment_duration }}</td>
                                             <td>{{ implode(" ", ($pattern->days))  }}</td>
                                             <td class="action-buttons-td">
-                                                <a
-                                                    class="btn btn-warning" href="{{ route('appointmentspatterns.edit', [$pattern->id]) }}">
-                                                    <i class="fas fa-pen mx-1"></i><span>Edit</span>
-                                                </a>
                                                 {!! Form::open(['method' => 'delete', 'route' => ['appointmentspatterns.destroy', [$pattern->id]], 'style' => 'display:inline']) !!}
                                                 {!! Form::button('<i class="fa fa-trash mx-1"></i>Delete', ['type' => 'submit', 'class' => 'btn btn-danger']) !!}
                                                 {!! Form::close() !!}
