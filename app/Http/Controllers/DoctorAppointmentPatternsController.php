@@ -63,29 +63,6 @@ class DoctorAppointmentPatternsController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\AppointmentPattern  $appointmentspattern
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(AppointmentPattern $appointmentspattern)
-    {
-        return view('appointments-patterns.doctor-edit', compact('appointmentspattern'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\AppointmentPattern  $appointmentspattern
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, AppointmentPattern $appointmentspattern)
-    {
-        //
-    }
-
-    /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\AppointmentPattern  $appointmentspattern

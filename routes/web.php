@@ -39,7 +39,7 @@ Route::get('/dashboard', function () {
 
 Route::name('')->middleware(['auth'])->group(function() {
     Route::resource('appointments', DoctorAppointmentController::class)->only('index', 'destroy');
-    Route::resource('appointmentspatterns', DoctorAppointmentPatternsController::class)->except('show');
+    Route::resource('appointmentspatterns', DoctorAppointmentPatternsController::class)->except('show', 'edit', 'update');
     Route::resource('patients', DoctorPatientController::class);
     Route::resource('patients.stories', DoctorStoryController::class)->except('index');
     Route::resource('patients.stories.treatments', DoctorTreatmentController::class)->except('index', 'show');
