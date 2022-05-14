@@ -89,17 +89,4 @@ class DoctorPatientController extends Controller
         session()->flash('success', 'Patient succesfully updated.');
         return redirect(route('patients.index'));
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Patient  $patient
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Patient $patient)
-    {
-        $patient->delete();
-        session()->flash('success', 'Patient succesfully deleted.');
-        return redirect(route('patients.index'));
-    }
 }

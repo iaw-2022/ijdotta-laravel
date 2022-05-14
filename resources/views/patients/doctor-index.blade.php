@@ -51,9 +51,6 @@
                                                     class="btn btn-warning" href="{{ route('patients.edit', $patient->id) }}">
                                                     <i class="fas fa-pen mx-1"></i><span>Edit</span>
                                                 </a>
-                                                {!! Form::open(['method' => 'delete', 'route' => ['patients.destroy', $patient->id], 'style' => 'display:inline']) !!}
-                                                {!! Form::button('<i class="fa fa-trash mx-1"></i>Delete', ['type' => 'submit', 'class' => 'btn btn-danger']) !!}
-                                                {!! Form::close() !!}
                                             </td>
                                         </tr>
                                     @endforeach()
