@@ -14,7 +14,10 @@
                 <div class="col-lg-12">
                     <div class="card">
 
+                        
                         <div class="card-body pb-0">
+                            <x-success-message/>
+                            <x-errors-alert/>
                             <a class="btn btn-success my-3" href="{{ route('admin.doctors.create') }}">
                                 <i class="fas fa-plus-circle mx-1"></i><span>Create</span>
                             </a>
