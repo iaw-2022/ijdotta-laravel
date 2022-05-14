@@ -21,7 +21,7 @@
         <i class="fas fa-users"></i><span>Users</span>
     </a>
     @endif
-    @if (Auth::user()->role->role == 'doctor')
+    @if (Auth::user()->role->role == 'doctor' && Auth::user()->doctor != null)
     {{-- Doctor links --}}
     {{-- <a class="nav-link btn" href="#"> --}}
         {{-- <span>Doctor links</span> --}}
