@@ -1,10 +1,10 @@
 @extends('layouts.auth_app')
 @section('title')
-    Admin Login
+    Login
 @endsection
 @section('content')
     <div class="card card-primary">
-        <div class="card-header"><h4>Admin Login</h4></div>
+        <div class="card-header"><h4>Login</h4></div>
 
         <div class="card-body">
             <form method="POST" action="{{ route('login') }}">
@@ -63,6 +63,9 @@
                     </button>
                 </div>
             </form>
+            <div class="d-flex justify-content-stretch flex-column">
+                <a class="btn btn-light" href="/register">Register</a>
+            </div>
         </div>
     </div>
 @endsection
