@@ -41,7 +41,12 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        User::create($this->validateUser($request));
+        $data = $this->validateUser($request);
+        if (!array_key_exists('password', $data)) {
+            $data = array_merge($data, ['password' => '12345678']);
+        }
+
+        User::create($data);
         session()->flash('success', 'User successfully created.');
         return redirect(route('admin.users.index'));
     }
