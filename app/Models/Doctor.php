@@ -14,7 +14,7 @@ class Doctor extends Model
 
     protected function email(): Attribute {
         return Attribute::make(
-            get: fn ($value) => $this->user()->get()->first()->email
+            get: fn ($value) => $this->user? $this->user->email : 'Unknown',
         );
     }
 

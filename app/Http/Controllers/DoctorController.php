@@ -97,6 +97,9 @@ class DoctorController extends Controller
      */
     public function destroy(Doctor $doctor)
     {
+        if (sizeof($doctor->stories->all()) > 0) {
+            return redirect(route('admin.doctors.index'))->withErrors(['cannot delete' => 'There are stories linked to this doctor. You cannot delete the doctor, but you are able to delete the associated user.']);
+        }
         $doctor->delete();
         session()->flash('success', 'Doctor succesfully deleted.');
         return redirect(route('admin.doctors.index'));
