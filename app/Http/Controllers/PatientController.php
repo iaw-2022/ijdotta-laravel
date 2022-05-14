@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Appointment;
 use App\Models\Patient;
+use Carbon\Carbon;
+use DateTimeZone;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 
@@ -94,6 +96,7 @@ class PatientController extends Controller
      */
     public function destroy(Patient $patient)
     {
+        $this->unlinkFutureAppointments($patient);
         $patient->delete();
         session()->flash('success', 'Patient succesfully deleted.');
         return redirect(route('admin.patients.index'));
@@ -118,5 +121,18 @@ class PatientController extends Controller
             'health_insurance_company' => ['max:100'],
             'health_insurance_id' => ['max:100'],
         ]);
+    }
+
+    private function unlinkFutureAppointments(Patient $patient) {
+        $appointments = $patient->appointments->all();
+        $now = Carbon::now(new DateTimeZone('America/Argentina/Buenos_Aires'));
+        foreach ($appointments as $appointment) {
+            $ap_date_time = Carbon::createFromFormat('Y-m-d H:i:s', $appointment->date.' '.$appointment->initial_time);
+            if ($now->lessThan($ap_date_time)) {
+                $ap_model = Appointment::find($appointment->id);
+                $ap_model->patient_id = null;
+                $ap_model->save();
+            }
+        }
     }
 }
