@@ -10,9 +10,11 @@ class Doctor extends Model
 {
     use HasFactory;
 
+    public $guarded = [];
+
     protected function email(): Attribute {
         return Attribute::make(
-            get: fn ($value) => $this->user()->get()->first()->email
+            get: fn ($value) => $this->user? $this->user->email : 'Unknown',
         );
     }
 

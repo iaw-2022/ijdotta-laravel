@@ -16,21 +16,19 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(
+        $this->call([
+            // RoleSeeder::class,
             UserSeeder::class
-        );
+        ]);
 
-        Doctor::factory()->count(2)
-                ->has(Appointment::factory()->count(3))
-                ->has(AppointmentPattern::factory()->count(2))
-                ->create();
-        
+        // Doctor::factory()->count(2)
+        //     ->has(AppointmentPattern::factory()->count(2))
+        //     ->has(Appointment::factory()->count(3))
+        //     ->create();
+
         $this->call([
             SimpsonsSeeder::class,
             PatientSeeder::class,
         ]);
-
-        
-
     }
 }

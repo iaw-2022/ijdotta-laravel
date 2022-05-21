@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Treatment extends Model
 {
     use HasFactory;
+    
+    public $guarded = [];
 
     public function story() {
         return $this->belongsTo(Story::class);

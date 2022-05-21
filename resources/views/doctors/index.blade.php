@@ -14,7 +14,10 @@
                 <div class="col-lg-12">
                     <div class="card">
 
+                        
                         <div class="card-body pb-0">
+                            <x-success-message/>
+                            <x-errors-alert/>
                             <a class="btn btn-success my-3" href="{{ route('admin.doctors.create') }}">
                                 <i class="fas fa-plus-circle mx-1"></i><span>Create</span>
                             </a>
@@ -22,6 +25,7 @@
 
                         <div class="card-body overflow-auto">
 
+                            <x-success-message/>
 
                             <table id="doctors" class="table table-hover">
                                 <thead>
@@ -39,10 +43,6 @@
                                             <td>{{ $doctor->lastname }}</td>
                                             <td>{{ $doctor->email }}</td>
                                             <td class="action-buttons-td">
-                                                <a
-                                                    class="btn btn-primary" href="{{ route('admin.doctors.show', $doctor->id) }}">
-                                                    <i class="fas fa-eye mx-1"></i><span>Show</span>
-                                                </a>
                                                 <a
                                                     class="btn btn-warning" href="{{ route('admin.doctors.edit', $doctor->id) }}">
                                                     <i class="fas fa-pen mx-1"></i><span>Edit</span>

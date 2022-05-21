@@ -10,7 +10,10 @@
                 <div class="col-lg-12">
                     <div class="card">
 
+
                         <div class="card-body pb-0">
+                            <x-success-message />
+                            <x-errors-alert />
                             <a class="btn btn-success my-3" href="{{ route('admin.users.create') }}">
                                 <i class="fas fa-plus-circle mx-1"></i><span>Create</span>
                             </a>
@@ -31,24 +34,26 @@
                                     @foreach ($users as $user)
                                         <tr>
                                             <th scope="row">{{ $user->id }}</th>
-                                            <td>{{ $user->role }}</td>
+                                            <td>{{ $user->role->role }}</td>
                                             <td>{{ $user->name }}</td>
                                             @php
-                                                $rel_doctor = $user->doctor()->get()->first();
+                                                $rel_doctor = $user
+                                                    ->doctor()
+                                                    ->get()
+                                                    ->first();
                                             @endphp
                                             <td>
                                                 @if ($rel_doctor)
-                                                    <a class="btn" href="{{route('admin.doctors.show', $rel_doctor->id)}}">
-                                                        <i class="fas fa-user-md mx-3"></i><span>{{$rel_doctor->lastname}}, {{$rel_doctor->name}}</span>
-                                                    </a>
+                                                    <i class="fas fa-user-md mx-3"></i><span>{{ $rel_doctor->lastname }},
+                                                        {{ $rel_doctor->name }}</span>
                                                 @else
                                                     -
                                                 @endif
                                             </td>
                                             <td>{{ $user->email }}</td>
                                             <td class="action-buttons-td">
-                                                <a
-                                                    class="btn btn-warning" href="{{ route('admin.users.edit', $user->id) }}">
+                                                <a class="btn btn-warning"
+                                                    href="{{ route('admin.users.edit', $user->id) }}">
                                                     <i class="fas fa-pen mx-1"></i><span>Edit</span>
                                                 </a>
                                                 {!! Form::open(['method' => 'delete', 'route' => ['admin.users.destroy', $user->id], 'style' => 'display:inline']) !!}

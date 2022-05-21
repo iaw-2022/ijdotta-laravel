@@ -6,6 +6,7 @@ use App\Models\Appointment;
 use App\Models\AppointmentPattern;
 use App\Models\Doctor;
 use App\Models\Patient;
+use App\Models\Role;
 use App\Models\Story;
 use App\Models\Treatment;
 use Illuminate\Database\Seeder;
@@ -22,11 +23,13 @@ class SimpsonsSeeder extends Seeder
      */
     public function run()
     {
+        $role_id = Role::where('role', 'doctor')->get()->first()->id;
+
         $user = User::create([
             'name' => 'Julius',
             'email' => 'dr.julius.hibbert@gmail.com',
-            'password' => bcrypt('12345678'),
-            'role' => 'doctor'
+            'password' => '12345678',
+            'role_id' => $role_id,
         ]);
 
         $doctor = Doctor::create([
@@ -82,7 +85,6 @@ class SimpsonsSeeder extends Seeder
             'name' => 'Homer',
             'lastname' => 'Simpson',
             'email' => 'chunkylover53@aol.com',
-            'password' => bcrypt(12345678),
             'health_insurance_company' => 'Springfield Health',
             'health_insurance_id' => 345761247
         ]);
@@ -112,7 +114,7 @@ class SimpsonsSeeder extends Seeder
 
             $treatment = Treatment::create([
                 'story_id' => $story->id,
-                'title' => 'SOME TITLE',
+                'title' => 'Paracetamol',
                 'description' => 'Reposo por 1 mes.'
             ]);
 

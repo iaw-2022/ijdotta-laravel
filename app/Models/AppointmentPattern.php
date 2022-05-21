@@ -9,6 +9,8 @@ class AppointmentPattern extends Model
 {
     use HasFactory;
 
+    public $guarded = [];
+
     protected $casts = [
         'days' => 'array',
     ];

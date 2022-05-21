@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('stories', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('patient_id');
-            $table->foreignId('doctor_id');
+            $table->foreignId('patient_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('doctor_id')->constrained()->cascadeOnUpdate()->restrictOnDelete();
             $table->date('date');
             $table->text('description');
             $table->timestamps();

@@ -18,9 +18,7 @@
             <div class="dropdown-menu dropdown-menu-right">
                 <div class="dropdown-title">
                     Welcome, {{\Illuminate\Support\Facades\Auth::user()->name}}</div>
-                <a class="dropdown-item has-icon edit-profile" href="#" data-id="{{ \Auth::id() }}">
-                    <i class="fa fa-user"></i>Edit Profile</a>
-                <a class="dropdown-item has-icon" data-toggle="modal" data-target="#changePasswordModal" href="#" data-id="{{ \Auth::id() }}"><i
+                <a class="dropdown-item has-icon" href="{{route('user.password.edit')}}"><i
                             class="fa fa-lock"> </i>Change Password</a>
                 <a href="{{ url('logout') }}" class="dropdown-item has-icon text-danger"
                    onclick="event.preventDefault(); localStorage.clear();  document.getElementById('logout-form').submit();">

@@ -23,7 +23,6 @@ class PatientFactory extends Factory
             'name' => $this->faker->name(),
             'lastname' => $this->faker->lastName(),
             'email' => $this->faker->unique()->safeEmail(),
-            'password' => bcrypt('12345678'),
             'health_insurance_company' => $companies[array_rand($companies)], //$this->faker->company,
             'health_insurance_id' => $this->faker->creditCardNumber()
         ];

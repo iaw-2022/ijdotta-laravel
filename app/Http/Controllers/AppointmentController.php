@@ -16,67 +16,12 @@ class AppointmentController extends Controller
     {
         $doctor_id = $request->query('doctor_id');
         if ($doctor_id) {
-            $appointments = Appointment::where('doctor_id', $doctor_id)->paginate(10);
+            $appointments = Appointment::where('doctor_id', $doctor_id)->all();
         }
         else {
-            $appointments = Appointment::paginate(10);
+            $appointments = Appointment::all();
         }
         return view('appointments.index')->with('appointments', $appointments);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Appointment  $appointment
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Appointment $appointment)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Appointment  $appointment
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Appointment $appointment)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Appointment  $appointment
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Appointment $appointment)
-    {
-        //
     }
 
     /**
@@ -87,7 +32,9 @@ class AppointmentController extends Controller
      */
     public function destroy(Appointment $appointment)
     {
-        //
+        $appointment->delete();
+        session()->flash('success', 'Appointment successfully deleted.');
+        return redirect()->back();
     }
 
 }

@@ -11,6 +11,9 @@
                     <div class="card">
                         <div class="card-body">
 
+                            <x-success-message/>
+                            <x-errors-alert/>
+
                             <ul class="nav nav-pills mb-3 d-flex justify-content-start" id="pills-tab" role="tablist">
                                 <li class="nav-item mx-2" role="presentation">
                                     <a class="nav-link active" id="pills-profile-tab" data-toggle="pill"
@@ -66,10 +69,10 @@
                                             </tr>
                                             <tr>
                                                 <th scope="row">
-                                                    Health Isurance Company
+                                                    Health Insurance Company
                                                 </th>
                                                 <td>
-                                                    {{ $patient->health_insurance_company }}
+                                                    <em>Hidden</em>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -77,7 +80,7 @@
                                                     Health Insurance Id
                                                 </th>
                                                 <td>
-                                                    {{ $patient->health_insurance_id }}
+                                                    <em>Hidden</em>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -104,16 +107,10 @@
                                                 @endphp
                                                 <tr>
                                                     <td>{{ $story->date }}</td>
-                                                    <td style="width:70%">{{ $story->description }}</td>
+                                                    <td style="width:70%">
+                                                        <em>Hidden story with id {{ $story->id }}</em>
+                                                    </td>
                                                     <td>
-                                                        <a class="btn btn-primary"
-                                                            href="{{ route('admin.patients.stories.show', [$patient->id, $story->id]) }}">
-                                                            <i class="fas fa-eye mx-1"></i><span>Show</span>
-                                                        </a>
-                                                        <a class="btn btn-warning"
-                                                            href="{{ route('admin.patients.stories.edit', [$patient->id, $story->id]) }}">
-                                                            <i class="fas fa-pen mx-1"></i><span>Edit</span>
-                                                        </a>
                                                         {!! Form::open(['method' => 'delete', 'route' => ['admin.patients.stories.destroy', [$patient->id, $story->id]], 'style' => 'display:inline']) !!}
                                                         {!! Form::button('<i class="fa fa-trash mx-1"></i>Delete', ['type' => 'submit', 'class' => 'btn btn-danger']) !!}
                                                         {!! Form::close() !!}
@@ -151,25 +148,13 @@
                                                     <td>{{ $appointment->end_time }}</td>
                                                     <td>
                                                         @if ($doctor)
-                                                            <a class="btn"
-                                                                href="{{ route('admin.doctors.show', $doctor->id) }}">
-                                                                <i class="fas fa-user-md mx-3"></i><span>{{ $doctor->lastname }},
-                                                                    {{ $doctor->name }}</span>
-                                                            </a>
+                                                            <i class="fas fa-user-md mx-3"></i><span>{{ $doctor->lastname }},
+                                                                {{ $doctor->name }}</span>
                                                         @else
                                                             Unknown doctor
                                                         @endif
                                                     </td>
                                                     <td class="action-buttons-td">
-                                                        <a class="btn btn-primary"
-                                                            href="{{ route('admin.patients.stories.create',$appointment->patient()->get()->first()->id) }}">
-                                                            <i class="fas fa-comment-alt mx-1"></i></i></i><span>Write
-                                                                story</span>
-                                                        </a>
-                                                        <a class="btn btn-warning"
-                                                            href="{{ route('admin.appointments.edit', $appointment->id) }}">
-                                                            <i class="fas fa-pen mx-1"></i><span>Edit</span>
-                                                        </a>
                                                         {!! Form::open(['method' => 'delete', 'route' => ['admin.appointments.destroy', $appointment->id], 'style' => 'display:inline']) !!}
                                                         {!! Form::button('<i class="fa fa-trash mx-1"></i>Delete', ['type' => 'submit', 'class' => 'btn btn-danger']) !!}
                                                         {!! Form::close() !!}

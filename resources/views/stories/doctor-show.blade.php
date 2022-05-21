@@ -10,6 +10,8 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
+                            <x-success-message/>
+                            <x-errors-alert/>
 
                             <div class="card p-3 rounded bg-light">
                                 <div class="row">
@@ -18,9 +20,7 @@
                                             $doctor = $story->doctor()->get()->first();
                                         @endphp
                                         <h1>{{ $story->date }}</h1>
-                                        <a class="btn" href="{{route('admin.doctors.show', $doctor->id)}}">
                                             <i class="fas fa-user-md mx-3"></i><span>{{$doctor->lastname}}, {{$doctor->name}}</span>
-                                        </a>
                                         <p>{{ $story->description }}</p>
                                     </div>
                                     <div class="col-3 d-flex justify-content-end align-items-start">
@@ -37,9 +37,16 @@
                             </div>
 
                             <div class="row mx-3">
-                                <div class="col-12">
+                                <div class="col-9">
                                     <h1>Treatments</h1>
                                 </div>
+                                <div class="col-3 d-flex align-items-center">
+                                    <a class="btn btn-primary" href="{{ route('patients.stories.treatments.create', [$patient->id, $story->id]) }}">
+                                        <i class="fas fa-plus-circle mx-1"></i><span>Add treatment</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="row mx-3 d-flex justify-content-start">
                             </div>
                             @foreach ($treatments as $treatment)
                                 <div class="row m-3">

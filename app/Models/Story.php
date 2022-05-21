@@ -9,6 +9,8 @@ class Story extends Model
 {
     use HasFactory;
 
+    public $guarded = [];
+
     public function patient() {
         return $this->belongsTo(Patient::class);
     }

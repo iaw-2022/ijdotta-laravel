@@ -9,16 +9,17 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="card">
-
                         
                         <div class="card-body pb-0">
+                            <x-success-message/>
                             <a class="btn btn-success my-3" href="{{ route('appointmentspatterns.create') }}">
                                 <i class="fas fa-plus-circle mx-1"></i><span>Create</span>
                             </a>
                         </div>
-
+                        
                         <div class="card-body overflow-auto">
-
+                            
+                            
                             <table class="table table-hover">
                                 <thead>
                                     <th scope="col">Id</th>
@@ -41,10 +42,6 @@
                                             <td>{{ $pattern->appointment_duration }}</td>
                                             <td>{{ implode(" ", ($pattern->days))  }}</td>
                                             <td class="action-buttons-td">
-                                                <a
-                                                    class="btn btn-warning" href="{{ route('appointmentspatterns.edit', [$pattern->id]) }}">
-                                                    <i class="fas fa-pen mx-1"></i><span>Edit</span>
-                                                </a>
                                                 {!! Form::open(['method' => 'delete', 'route' => ['appointmentspatterns.destroy', [$pattern->id]], 'style' => 'display:inline']) !!}
                                                 {!! Form::button('<i class="fa fa-trash mx-1"></i>Delete', ['type' => 'submit', 'class' => 'btn btn-danger']) !!}
                                                 {!! Form::close() !!}

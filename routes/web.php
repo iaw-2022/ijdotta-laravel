@@ -7,6 +7,7 @@ use App\Http\Controllers\DoctorAppointmentPatternsController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\DoctorPatientController;
 use App\Http\Controllers\DoctorStoryController;
+use App\Http\Controllers\DoctorTreatmentController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\StoryController;
 use App\Http\Controllers\TreatmentController;
@@ -36,30 +37,27 @@ Route::get('/dashboard', function () {
 
 // Does not require auth currently.
 
-Route::name('')->group(function() {
-    Route::resources([
-        // 'doctors' => DoctorController::class,
-        // 'doctors.appointmentspatterns' => AppointmentPatternController::class,
-        'appointments' => DoctorAppointmentController::class,
-        'appointmentspatterns' => DoctorAppointmentPatternsController::class,
-        'patients' => DoctorPatientController::class,
-        'patients.stories' => DoctorStoryController::class,
-        'patients.stories.treatments' => TreatmentController::class,
-    ]);
-
+Route::name('')->middleware(['auth'])->group(function () {
+    Route::resource('appointments', DoctorAppointmentController::class)->only('index', 'destroy');
+    Route::resource('appointmentspatterns', DoctorAppointmentPatternsController::class)->except('show', 'edit', 'update');
+    Route::resource('patients', DoctorPatientController::class)->except('destroy');
+    Route::resource('patients.stories', DoctorStoryController::class)->except('index');
+    Route::resource('patients.stories.treatments', DoctorTreatmentController::class)->except('index', 'show');
 });
 
-Route::prefix('admin')->name('admin.')->group(function () {
-    Route::resources([
-        'doctors' => DoctorController::class,
-        'doctors.appointmentspatterns' => AppointmentPatternController::class,
-        'appointments' => AppointmentController::class,
-        'patients' => PatientController::class,
-        'patients.stories' => StoryController::class,
-        'patients.stories.treatments' => TreatmentController::class,
-        'users' => UserController::class
-    ]);
+Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () {
+    Route::resource('doctors', DoctorController::class)->except('show');
+    Route::resource('doctors.appointmentspatterns', AppointmentPatternController::class)->only('index', 'destroy');
+    Route::resource('appointments', AppointmentController::class)->only('index', 'destroy');
+    Route::resource('patients', PatientController::class);
+    Route::resource('patients.stories', StoryController::class)->only('destroy');
+    Route::resource('users', UserController::class);
 });
+
+Route::middleware(['auth'])->name('user.password.edit')
+    ->get('/user/password/edit', [UserController::class, 'editPassword']);
+Route::middleware(['auth'])->name('user.password')
+    ->put('/user/password', [UserController::class, 'changePassword']);
 
 
 Route::get('/main', function () {

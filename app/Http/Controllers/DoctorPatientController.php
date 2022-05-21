@@ -26,7 +26,7 @@ class DoctorPatientController extends Controller
      */
     public function create()
     {
-        //
+        return view('patients.doctor-create');
     }
 
     /**
@@ -37,7 +37,9 @@ class DoctorPatientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Patient::create(PatientController::validatePatient($request));
+        session()->flash('success', 'Patient succesfully created.');
+        return redirect(route('patients.index'));
     }
 
     /**
@@ -70,7 +72,8 @@ class DoctorPatientController extends Controller
      */
     public function edit(Patient $patient)
     {
-        //
+        return view('patients.doctor-edit')
+                ->with('patient', $patient);
     }
 
     /**
@@ -82,17 +85,8 @@ class DoctorPatientController extends Controller
      */
     public function update(Request $request, Patient $patient)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Patient  $patient
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Patient $patient)
-    {
-        //
+        $patient->update(PatientController::validatePatient($request, $patient));
+        session()->flash('success', 'Patient succesfully updated.');
+        return redirect(route('patients.index'));
     }
 }

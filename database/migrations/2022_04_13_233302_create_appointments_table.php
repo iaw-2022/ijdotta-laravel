@@ -13,15 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('appointment_patterns', function (Blueprint $table) {
+        Schema::create('appointments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('doctor_id');
-            $table->date('initial_date');
-            $table->date('end_date');
+            $table->foreignId('appointment_pattern_id')->default(0)->constrained()->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('doctor_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('patient_id')->nullable()->constrained()->cascadeOnUpdate()->cascadeOnDelete();
+            $table->date('date');
             $table->time('initial_time');
             $table->time('end_time');
-            $table->time('appointment_duration');
-            $table->json('days');
             $table->timestamps();
         });
     }
@@ -33,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('appointment_patterns');
+        Schema::dropIfExists('appointments');
     }
 };

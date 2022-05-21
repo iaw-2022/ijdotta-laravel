@@ -4,7 +4,7 @@
     </a>
     
     {{-- Admin links --}}
-    @if (Auth::user()->role == 'admin')
+    @if (Auth::user()->role->role == 'admin')
     {{-- <a class="nav-link btn" href="#">
         <span>Admin links</span>
     </a> --}}
@@ -21,7 +21,7 @@
         <i class="fas fa-users"></i><span>Users</span>
     </a>
     @endif
-    @if (Auth::user()->role == 'doctor')
+    @if (Auth::user()->role->role == 'doctor' && Auth::user()->doctor != null)
     {{-- Doctor links --}}
     {{-- <a class="nav-link btn" href="#"> --}}
         {{-- <span>Doctor links</span> --}}

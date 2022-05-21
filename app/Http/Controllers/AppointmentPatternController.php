@@ -5,9 +5,20 @@ namespace App\Http\Controllers;
 use App\Models\AppointmentPattern;
 use App\Models\Doctor;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Helpers\AppointmentPatternHelper;
+use App\Http\Controllers\Helpers\AppointmentPatternHelperImpl;
+use Exception;
 
 class AppointmentPatternController extends Controller
 {
+
+    public AppointmentPatternHelper $appointmentPatternHelper;
+
+    public function __construct()
+    {
+        $this->appointmentPatternHelper = new AppointmentPatternHelperImpl();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -28,7 +39,7 @@ class AppointmentPatternController extends Controller
      */
     public function create(Doctor $doctor)
     {
-        //
+        return view('appointments-patterns.create', compact('doctor'));
     }
 
     /**
@@ -40,31 +51,29 @@ class AppointmentPatternController extends Controller
      */
     public function store(Request $request, Doctor $doctor)
     {
-        //
-    }
+        $data = $request->validate([
+            'initial_date' => ['required', 'date'],
+            'end_date' => ['required', 'date', 'after:initial_date'],
+            'initial_time' => ['required', 'date_format:H:i'],
+            'end_time' => ['required', 'date_format:H:i', 'after:initial_time'],
+            'appointment_duration' => ['required', 'digits_between:1,2'],
+            'days' => ['required', 'array'],
+        ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Doctor  $doctor
-     * @param  \App\Models\AppointmentPattern  $appointmentPattern
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Doctor $doctor, AppointmentPattern $appointmentPattern)
-    {
-        //
+        AppointmentPattern::create($data);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Doctor  $doctor
-     * @param  \App\Models\AppointmentPattern  $appointmentPattern
+     * @param  \App\Models\AppointmentPattern  $appointmentspattern
      * @return \Illuminate\Http\Response
      */
-    public function edit(Doctor $doctor, AppointmentPattern $appointmentPattern)
+    public function edit(Doctor $doctor, AppointmentPattern $appointmentspattern)
     {
-        //
+        return view('appointments-patterns.edit', compact('doctor'))
+                ->with('appointmentspattern', $appointmentspattern);
     }
 
     /**
@@ -72,23 +81,36 @@ class AppointmentPatternController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Doctor  $doctor
-     * @param  \App\Models\AppointmentPattern  $appointmentPattern
+     * @param  \App\Models\AppointmentPattern  $appointmentspattern
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Doctor $doctor, AppointmentPattern $appointmentPattern)
+    public function update(Request $request, Doctor $doctor, AppointmentPattern $appointmentspattern)
     {
-        //
+        $data = $request->input();
+        
+        $attributes = ['initial_date', 'end_date', 'initial_time', 'end_time', 'appointment_duration', 'days'];
+        foreach ($attributes as $attr) {
+            $appointmentspattern->$attr = $data[$attr];
+        }
+
+        try {
+            $this->appointmentPatternHelper->checkConflicts($appointmentspattern);
+            $appointmentspattern->save();
+        } catch (Exception $exception) {
+            clock($exception);
+        }
+        return redirect(route('admin.doctors.appointmentspatterns.index', [$doctor->id]));
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Doctor  $doctor
-     * @param  \App\Models\AppointmentPattern  $appointmentPattern
+     * @param  \App\Models\AppointmentPattern  $appointmentspattern
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Doctor $doctor, AppointmentPattern $appointmentPattern)
+    public function destroy(Doctor $doctor, AppointmentPattern $appointmentspattern)
     {
-        //
+        $appointmentspattern->delete();
     }
 }

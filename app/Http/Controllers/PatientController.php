@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Appointment;
 use App\Models\Patient;
+use Carbon\Carbon;
+use DateTimeZone;
+use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 
 class PatientController extends Controller
@@ -26,7 +29,7 @@ class PatientController extends Controller
      */
     public function create()
     {
-        //
+        return view('patients.create');
     }
 
     /**
@@ -37,7 +40,9 @@ class PatientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Patient::create($this->validatePatient($request));
+        session()->flash('success', 'Patient succesfully created.');
+        return redirect(route('admin.patients.index'));
     }
 
     /**
@@ -65,7 +70,8 @@ class PatientController extends Controller
      */
     public function edit(Patient $patient)
     {
-        //
+        return view('patients.edit')
+                ->with('patient', $patient);
     }
 
     /**
@@ -77,7 +83,9 @@ class PatientController extends Controller
      */
     public function update(Request $request, Patient $patient)
     {
-        //
+        $patient->update($this->validatePatient($request, $patient));
+        session()->flash('success', 'Patient succesfully updated.');
+        return redirect(route('admin.patients.index'));
     }
 
     /**
@@ -88,6 +96,43 @@ class PatientController extends Controller
      */
     public function destroy(Patient $patient)
     {
-        //
+        $this->unlinkFutureAppointments($patient);
+        $patient->delete();
+        session()->flash('success', 'Patient succesfully deleted.');
+        return redirect(route('admin.patients.index'));
+    }
+
+    public static function mapPatientIdToPatientName($patients) {
+        $patientsMap = [];
+        foreach ($patients as $patient) {
+            $patientsMap[$patient->id] = $patient->lastname.', '.$patient->name;
+        }
+        return $patientsMap;
+    }
+
+    public static function validatePatient(Request $request, ?Patient $patient = null) {
+
+        $patient ??= new Patient();
+
+        return $request->validate([
+            'name' => ['required', 'max:100', 'regex:/[\w ]+/'],
+            'lastname' => ['required', 'max:100', 'regex:/[\w ]+/'],
+            'email' => ['required', Rule::unique('patients', 'email')->ignore($patient)],
+            'health_insurance_company' => ['max:100'],
+            'health_insurance_id' => ['max:100'],
+        ]);
+    }
+
+    private function unlinkFutureAppointments(Patient $patient) {
+        $appointments = $patient->appointments->all();
+        $now = Carbon::now(new DateTimeZone('America/Argentina/Buenos_Aires'));
+        foreach ($appointments as $appointment) {
+            $ap_date_time = Carbon::createFromFormat('Y-m-d H:i:s', $appointment->date.' '.$appointment->initial_time);
+            if ($now->lessThan($ap_date_time)) {
+                $ap_model = Appointment::find($appointment->id);
+                $ap_model->patient_id = null;
+                $ap_model->save();
+            }
+        }
     }
 }
