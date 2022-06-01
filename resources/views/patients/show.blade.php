@@ -83,6 +83,14 @@
                                                     <em>Hidden</em>
                                                 </td>
                                             </tr>
+                                            <tr>
+                                                <th scope="row">
+                                                    Validation code
+                                                </th>
+                                                <td>
+                                                    <em>{{ $patient->verification_code }}</em>
+                                                </td>
+                                            </tr>
                                         </tbody>
                                     </table>
 

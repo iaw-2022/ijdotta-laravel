@@ -80,6 +80,14 @@
                                                     {{ $patient->health_insurance_id }}
                                                 </td>
                                             </tr>
+                                            <tr>
+                                                <th scope="row">
+                                                    Validation code
+                                                </th>
+                                                <td>
+                                                    <em>{{ $patient->verification_code }}</em>
+                                                </td>
+                                            </tr>
                                         </tbody>
                                     </table>
 
