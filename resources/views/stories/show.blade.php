@@ -48,10 +48,6 @@
                                         {{ $treatment->description }}
                                     </div>
                                     <div class="col-3 d-flex align-items-center">
-                                        <a class="btn btn-warning"
-                                            href="{{ route('admin.patients.stories.treatments.edit', [$patient->id, $story->id, $treatment->id]) }}">
-                                            <i class="fas fa-pen mx-1"></i><span>Edit</span>
-                                        </a>
                                         {!! Form::open(['method' => 'delete', 'route' => ['admin.patients.stories.treatments.destroy', [$patient->id, $story->id, $treatment->id]], 'style' => 'display:inline']) !!}
                                         {!! Form::button('<i class="fa fa-trash mx-1"></i>Delete', ['type' => 'submit', 'class' => 'btn btn-danger mx-2']) !!}
                                         {!! Form::close() !!}
