@@ -82,7 +82,7 @@ class DoctorAppointmentPatternsController extends Controller
             'end_date' => ['required', 'date', 'after:initial_date'],
             'initial_time' => ['required', 'date_format:H:i'],
             'end_time' => ['required', 'date_format:H:i', 'after:initial_time'],
-            'appointment_duration' => ['required', 'digits_between:1,2'],
+            'appointment_duration' => ['required', 'date_format:H:i'],
             'days' => ['required', 'array'],
         ]);
 

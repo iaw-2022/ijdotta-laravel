@@ -26,7 +26,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    {{ Form::button('<i class="fas fa-check-circle mx-1"></i><span>Update treatment</span>', ['type' => 'submit','class' => 'btn btn-primary']) }}
+                                    {{ Form::button('<i class="fas fa-check-circle mx-1"></i><span>Create treatment</span>', ['type' => 'submit','class' => 'btn btn-primary']) }}
                                     <a class="btn btn-danger" href="{{ redirect()->back()->getTargetUrl() }}">
                                         <i class="fas fa-ban mx-1"></i><span>Cancel</span>
                                     </a>

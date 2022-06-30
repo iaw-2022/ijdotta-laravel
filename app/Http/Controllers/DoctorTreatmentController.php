@@ -35,43 +35,6 @@ class DoctorTreatmentController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Story  $story
-     * @param  \App\Models\Treatment  $treatment
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Story $story, Treatment $treatment)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Story  $story
-     * @param  \App\Models\Treatment  $treatment
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Patient $patient, Story $story, Treatment $treatment)
-    {
-        return view('treatments.doctor-edit', compact('patient', 'story', 'treatment'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Story  $story
-     * @param  \App\Models\Treatment  $treatment
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Patient $patient, Story $story, Treatment $treatment)
-    {
-        //
-    }
-
-    /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Story  $story
@@ -87,11 +50,11 @@ class DoctorTreatmentController extends Controller
 
     public function validateTreatment(Request $request, Story $story) {
         $attributes = $request->validate([
+            'title' => ['required'],
             'description' => ['required'],
         ]);
 
         return array_merge($attributes, [
-            'title' => 'No title',
             'story_id' => $story->id,
         ]);
     }
