@@ -20,7 +20,7 @@ return new class extends Migration
             $table->date('end_date');
             $table->time('initial_time');
             $table->time('end_time');
-            $table->time('appointment_duration');
+            $table->integer('appointment_duration');
             $table->json('days');
             $table->timestamps();
         });

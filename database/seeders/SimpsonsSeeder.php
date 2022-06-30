@@ -52,7 +52,7 @@ class SimpsonsSeeder extends Seeder
             'end_date' => $end_date->toDateString(),
             'initial_time' => $initial_date->toTimeString(),
             'end_time' => $end_date->toTimeString(),
-            'appointment_duration' => '00:30:00',
+            'appointment_duration' => '30',
             'days' => ['Mon', 'Tue', 'Wed'],
         ]);
 

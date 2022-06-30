@@ -48,7 +48,7 @@
                                             {{ Form::label('appointment_duration') }}
                                             {{ Form::text('appointment_duration', null, ['class' => 'form-control', 'aria-describedby' => 'durationHelp']) }}
                                             <small id="durationHelp" class="form-text text-muted">Enter a number of
-                                                minutes (format: hh:mm)</small>
+                                                minutes (up to 99)</small>
                                         </div>
                                     </div>
                                 </div>
